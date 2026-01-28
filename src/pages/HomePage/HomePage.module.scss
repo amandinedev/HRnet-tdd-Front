@@ -1,0 +1,11 @@
+@use "../../sass/abstracts" as a;
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: auto;
+  gap: 40px;
+  background-color: #d0d0d0;
+}

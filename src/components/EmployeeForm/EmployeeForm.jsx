@@ -5,7 +5,7 @@ import {
   addEmployeeSuccess,
   addEmployeeFailed,
 } from "../../reduxFeatures/employeeSlice";
-
+import Button from "../Button/Button";
 import InputText from "../InputText/InputText";
 import InputDate from "../InputDate/InputDate";
 import InputSelect from "../InputSelect/InputSelect";
@@ -182,6 +182,9 @@ const EmployeeForm = () => {
           id="zipCode"
           name="zipCode"
           type="number"
+          min={0}
+          max={99999}
+          step={1}
           value={formData.zipCode}
           onChange={handleChangeInputText}
           submitted={submitted}
@@ -196,7 +199,7 @@ const EmployeeForm = () => {
         }
         submitted={submitted}
       />
-      <button type="submit">Save</button>
+      <Button type="submit">Save</Button>
     </form>
   );
 };

@@ -3,68 +3,68 @@
 // ============================================================================
 
 // ==================== CORE COLORS ====================
-$df-primary-color: #4CAF50 !default;
+$df-primary-color: #2E7D32 !default;          // Updated: Darker green for better contrast (was #4CAF50)
 $df-primary-color-light: #5cd633 !default;
-$df-primary-color-dark: #388E3C !default;
-$df-secondary-color: #2196F3 !default;
+$df-primary-color-dark: #1B5E20 !default;     // Updated: Darker for contrast (was #388E3C)
+$df-secondary-color: #1565C0 !default;        // Updated: Darker blue (was #2196F3)
 $df-success-color: #2E7D32 !default;
-$df-warning-color: #ED6C02 !default;
-$df-danger-color: #D32F2F !default;
+$df-warning-color: #E65100 !default;          // Updated: Darker orange (was #ED6C02)
+$df-danger-color: #C62828 !default;           // Updated: Darker red (was #D32F2F)
 $df-info-color: #0288D1 !default;
 
 // ==================== LIGHT THEME COLORS ====================
 $df-bg-color: #FFFFFF !default;
 $df-card-bg: #FFFFFF !default;
-$df-text-color: #212121 !default;
-$df-text-color-light: #666666 !default;
-$df-border-color: #e9ecef !default; // Match dt border color
+$df-text-color: #000000 !default;             // Updated: Pure black for best contrast (was #212121)
+$df-text-color-light: #424242 !default;       // Updated: Darker for better contrast (was #666666)
+$df-border-color: #BDBDBD !default;           // Updated: Darker border (was #e9ecef)
 $df-border-color-light: #F0F0F0 !default;
 $df-hover-color: #F5F5F5 !default;
-$df-header-bg: #FAFAFA !default;
-$df-footer-bg: #FAFAFA !default;
-$df-disabled-color: #757575 !default;
-$df-placeholder-color: #757575 !default; // Match dt placeholder
-$df-error-color: #D32F2F !default;
+$df-header-bg: #F5F5F5 !default;              // Updated: Slightly darker header (was #FAFAFA)
+$df-footer-bg: #F5F5F5 !default;              // Updated: Slightly darker footer (was #FAFAFA)
+$df-disabled-color: #616161 !default;         // Updated: Much darker for better contrast (was #757575)
+$df-placeholder-color: #616161 !default;      // Updated: Darker placeholder (was #757575)
+$df-error-color: #B71C1C !default;            // Updated: Darker error color (was #D32F2F)
 $df-success-bg: #E8F5E9 !default;
 
 // ==================== FORM CONTAINER & CARD COLORS ====================
-$df-container-bg: #FFFFFF !default; // Match dt-bg-color
-$df-field-bg: #FFFFFF !default; // Match dt-bg-color
-$df-fieldset-bg: #FBFBFB !default;
-$df-card-shadow: rgba(0, 0, 0, 0.12) !default; // Match dt-box-shadow
+$df-container-bg: #FFFFFF !default;
+$df-field-bg: #FFFFFF !default;
+$df-fieldset-bg: #F9F9F9 !default;            // Updated: Slightly darker for distinction (was #FBFBFB)
+$df-card-shadow: rgba(0, 0, 0, 0.15) !default; // Updated: Slightly darker shadow (was 0.12)
 
 // ==================== DARK THEME COLORS ====================
-$df-dark-bg: #121212 !default; // Match dt-dark-bg
+$df-dark-bg: #121212 !default;
 $df-dark-card-bg: #1E1E1E !default;
-$df-dark-text: #E0E0E0 !default; // Match dt-dark-text
-$df-dark-text-light: #B0B0B0 !default;
-$df-dark-border: #333333 !default; // Match dt-dark-border
+$df-dark-text: #FFFFFF !default;              // Updated: Pure white for best contrast (was #E0E0E0)
+$df-dark-text-light: #CCCCCC !default;        // Updated: Brighter light text (was #B0B0B0)
+$df-dark-border: #424242 !default;            // Updated: Brighter border (was #333333)
 $df-dark-border-light: #2A2A2A !default;
-$df-dark-hover: #1E1E1E !default; // Match dt-dark-hover
-$df-dark-header: #1A1A1A !default; // Match dt-dark-header
+$df-dark-hover: #1E1E1E !default;
+$df-dark-header: #1A1A1A !default;
 $df-dark-footer: #1A1A1A !default;
-$df-dark-cell-bg: #1A1A1A !default; // Match dt-dark-cell-bg
-$df-dark-cell-striped: #222222 !default; // Match dt-dark-cell-striped
-$df-dark-disabled: #666666 !default; // Match dt-dark-disabled
-$df-dark-placeholder: #888888 !default; // Match dt-dark-placeholder
-$df-dark-error: #F44336 !default;
+$df-dark-cell-bg: #1A1A1A !default;
+$df-dark-cell-striped: #222222 !default;
+$df-dark-disabled: #757575 !default;          // Updated: Brighter disabled (was #666666)
+$df-dark-placeholder: #9E9E9E !default;       // Updated: Brighter placeholder (was #888888)
+$df-dark-error: #EF5350 !default;             // Updated: Brighter error for dark theme (was #F44336)
 $df-dark-success-bg: #1B5E20 !default;
 
 // ==================== FORM CONTAINER DARK THEME ====================
-$df-dark-container-bg: #1A1A1A !default; // Match dt-dark-cell-bg
-$df-dark-fieldset-bg: #2A2A2A !default;
+$df-dark-container-bg: #1A1A1A !default;
+$df-dark-fieldset-bg: #242424 !default;       // Updated: Brighter for better contrast (was #2A2A2A)
 
 // ==================== FORM SPECIFIC COLORS ====================
-$df-field-label-color: #212121 !default;
-$df-field-required-color: #D32F2F !default;
-$df-field-hint-color: #757575 !default;
-$df-field-border-focus: #4CAF50 !default;
+$df-field-label-color: #000000 !default;      // Updated: Black for best contrast (was #212121)
+$df-field-required-color: #B71C1C !default;   // Updated: Darker red (was #D32F2F)
+$df-field-hint-color: #424242 !default;       // Updated: Darker hint (was #757575)
+$df-field-border-focus: #2E7D32 !default;     // Updated: Darker focus border (was #4CAF50)
 $df-field-border-hover: #BDBDBD !default;
 
 // Dark theme form colors
-$df-dark-field-label-color: #E0E0E0 !default;
-$df-dark-field-required-color: #F44336 !default;
-$df-dark-field-hint-color: #B0B0B0 !default;
+$df-dark-field-label-color: #FFFFFF !default; // Updated: White for best contrast (was #E0E0E0)
+$df-dark-field-required-color: #EF5350 !default; // Updated: Brighter red (was #F44336)
+$df-dark-field-hint-color: #CCCCCC !default;  // Updated: Brighter hint (was #B0B0B0)
 $df-dark-field-border-focus: #5cd633 !default;
 $df-dark-field-border-hover: #555555 !default;
 
@@ -83,44 +83,35 @@ $df-line-height-sm: 1.4 !default;
 $df-line-height-lg: 1.8 !default;
 
 // ==================== SPACING & SIZING ====================
-// Match dt border radius values
 $df-border-radius: 8px !default;
 $df-border-radius-sm: 4px !default;
 $df-border-radius-lg: 12px !default;
 $df-border-radius-xl: 16px !default;
 
-// Match dt padding values
 $df-padding: 16px 12px !default;
 $df-padding-sm: 12px 8px !default;
 $df-padding-lg: 20px 16px !default;
 $df-padding-xl: 24px 20px !default;
 
-// Match dt controls padding
 $df-controls-padding: 20px !default;
 $df-controls-padding-sm: 16px !default;
 $df-controls-padding-lg: 24px !default;
 
 // ==================== SHADOWS & EFFECTS ====================
-// Match dt shadows exactly
-$df-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12) !default;
-$df-box-shadow-lg: 0 6px 24px rgba(0, 0, 0, 0.18) !default;
+$df-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !default;    // Updated: Slightly darker (was 0.12)
+$df-box-shadow-lg: 0 6px 24px rgba(0, 0, 0, 0.2) !default;   // Updated: Slightly darker (was 0.18)
 $df-box-shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.1) !default;
 $df-box-shadow-focus: 0 0 0 4px rgba($df-primary-color, 0.25) !default;
 
-// Match dt transition speeds
 $df-transition-speed: 0.2s !default;
 $df-transition-speed-slow: 0.3s !default;
 $df-transition-speed-fast: 0.15s !default;
 $df-transition-timing: ease-in-out !default;
 
 // ==================== BREAKPOINTS ====================
-// Use dt breakpoints
 $df-breakpoint-xs: 0 !default;
 $df-breakpoint-sm: 576px !default;
 $df-breakpoint-md: 768px !default;
 $df-breakpoint-lg: 992px !default;
 $df-breakpoint-xl: 1200px !default;
 $df-breakpoint-xxl: 1400px !default;
-
-// Remove unused variables and keep only what's needed
-// ... (remove all the unused sizing variables)

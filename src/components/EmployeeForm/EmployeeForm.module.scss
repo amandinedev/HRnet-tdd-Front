@@ -2,32 +2,19 @@
 @use "sass:color";
 
 .formContainer {
-  @include df-form-container; // This now matches dt styling
-  
-  // Additional form-specific styles
+  @include df-form-container; 
   gap: 24px;
   
   fieldset.address {
     @include df-fieldset-styles;
-    
+    padding: $df-padding-lg;
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+
     legend {
       font-size: 18px;
       font-weight: $df-font-weight-semibold;
-    }
-  }
-  
-  button[type="submit"] {
-    @include df-button-reset;
-    width: 100%;
-    margin-top: 8px;
-    
-    &:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-    
-    &:active:not(:disabled) {
-      transform: translateY(0);
     }
   }
   
@@ -38,13 +25,6 @@
     fieldset.address {
       @include df-fieldset-styles(dark);
     }
-    
-    button[type="submit"] {
-      background: $df-primary-color-light;
-      
-      &:hover:not(:disabled) {
-        background: color.scale($df-primary-color-light, $lightness: -10%);
-      }
-    }
+  
   }
 }

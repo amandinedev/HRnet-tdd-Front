@@ -60,7 +60,7 @@
   }
 }
 
-@mixin df-button-reset {
+@mixin df-button {
   padding: 12px 24px;
   border: 2px solid transparent;
   background: $df-primary-color;
@@ -73,7 +73,7 @@
   align-items: center;
   justify-content: center;
   line-height: inherit;
-  margin: 0;
+  margin: auto;
   min-height: 48px;
   min-width: 48px;
   border-radius: $df-border-radius-sm;
@@ -115,9 +115,15 @@
 }
 
 @mixin df-fieldset-styles($theme: light) {
-  $border: if($theme == dark, $df-dark-border, $df-border-color);
-  $bg: if($theme == dark, $df-dark-fieldset-bg, $df-fieldset-bg);
-  $text: if($theme == dark, $df-dark-text, $df-text-color);
+  $border: $df-border-color;
+  $bg: $df-fieldset-bg;
+  $text: $df-text-color;
+
+  @if $theme == dark {
+    $border: $df-dark-border;
+    $bg: $df-dark-fieldset-bg;
+    $text: $df-dark-text;
+  }
   
   border: 2px solid $border;
   border-radius: $df-border-radius;
@@ -199,6 +205,3 @@
     }
   }
 }
-
-// Keep other useful mixins as they are...
-// (truncate, flex utilities, etc.)

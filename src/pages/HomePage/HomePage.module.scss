@@ -1,4 +1,4 @@
-@use "../../sass/abstracts" as a;
+@use '../../sass/abstracts' as *;
 
 .homeContainer {
   display: flex;
@@ -7,5 +7,10 @@
   padding-bottom: 50px;
   margin: auto;
   gap: 40px;
-  background-color: #d0d0d0;
+  background-color: hsl(0, 0%, 90%);
+}
+
+.linkButton{
+  @include df-button;
+  width: 48vw;
 }

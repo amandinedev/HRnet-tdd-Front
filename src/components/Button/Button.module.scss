@@ -1,0 +1,6 @@
+@use "../../sass/abstracts" as *;
+
+button {
+  @include df-button;
+  width: 100%;
+}

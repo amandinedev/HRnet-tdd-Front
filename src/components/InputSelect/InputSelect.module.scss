@@ -1,4 +1,4 @@
-// InputSelect.module.scss
+// InputSelect.module.scss - FOCUS WITH GREEN BORDER
 @use '../../sass/abstracts' as *;
 @use "sass:color";
 
@@ -7,90 +7,449 @@
   flex-direction: column;
   gap: 8px;
   width: 100%;
+}
+
+// ============================================================================
+// LABEL STYLING
+// ============================================================================
+
+.df-input-select-label {
+  font-weight: $df-font-weight-semibold;
+  color: $df-text-color;
+  font-size: 0.95em;
+  text-align: start;
   
-  .df-input-select-label {
-    font-weight: $df-font-weight-semibold;
-    color: $df-text-color;
-    font-size: 0.95em;
-    text-align: start;
+  &.required::after {
+    content: ' *';
+    color: $df-error-color;
+  }
+  
+  .df-dark-theme & {
+    color: $df-dark-text;
     
     &.required::after {
-      content: ' *';
-      color: $df-error-color;
-    }
-    
-    .df-dark-theme & {
-      color: $df-dark-text;
-      
-      &.required::after {
-        color: $df-dark-error;
-      }
-    }
-  }
-  
-  .df-input-select-field {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid $df-border-color;
-    border-radius: $df-border-radius-sm;
-    font-family: $df-font-family;
-    font-size: $df-font-size;
-    background: $df-field-bg;
-    color: $df-text-color;
-    transition: all $df-transition-speed $df-transition-timing;
-    box-sizing: border-box;
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23666666' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 16px;
-    padding-right: 36px;
-    
-    // GREEN BORDER ON FOCUS
-    &:focus {
-      outline: none;
-      border-color: $df-primary-color;
-      box-shadow: 0 0 0 3px rgba($df-primary-color, 0.1);
-    }
-    
-    &:hover:not(:focus) {
-      border-color: color.scale($df-border-color, $lightness: -10%);
-    }
-    
-    &.error {
-      border-color: $df-error-color;
-    }
-    
-    // Dark theme styles
-    .df-dark-theme & {
-      background: $df-dark-cell-bg;
-      color: $df-dark-text;
-      border-color: $df-dark-border;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23E0E0E0' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-      
-      &:focus {
-        border-color: $df-primary-color-light;
-        box-shadow: 0 0 0 3px rgba($df-primary-color-light, 0.1);
-      }
-      
-      &:hover:not(:focus) {
-        border-color: color.scale($df-dark-border, $lightness: 10%);
-      }
-      
-      &.error {
-        border-color: $df-dark-error;
-      }
-    }
-  }
-  
-  .df-input-select-error {
-    color: $df-error-color;
-    font-size: 0.85em;
-    margin: 0;
-    
-    .df-dark-theme & {
       color: $df-dark-error;
     }
+  }
+}
+
+// ============================================================================
+// CUSTOM DROPDOWN WRAPPER
+// ============================================================================
+
+.df-input-select-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+// ============================================================================
+// DROPDOWN TRIGGER 
+// ============================================================================
+
+.df-input-select-trigger {
+  width: 100%;
+  padding: 10px 36px 10px 12px;
+  border: 1px solid $df-border-color;
+  border-radius: $df-border-radius-sm;
+  background: $df-field-bg;
+  color: $df-text-color;
+  font-family: $df-font-family;
+  font-size: $df-font-size;
+  cursor: pointer;
+  transition: all $df-transition-speed $df-transition-timing;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  position: relative;
+  box-sizing: border-box;
+
+  &:hover:not(.df-input-select-trigger--disabled) {
+    border: 2px solid $df-primary-color;
+    background: rgba($df-primary-color, 0.08);
+  }
+
+  &:focus {
+    outline: none;
+    border: 2px solid $df-primary-color; 
+    background: rgba($df-primary-color, 0.08);
+ 
+  }
+
+  &:active:not(.df-input-select-trigger--disabled) {
+    transform: translateY(1px);
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: color.scale($df-field-bg, $lightness: -5%);
+    
+    &:focus {
+      border-color: $df-border-color !important;
+      box-shadow: none;
+    }
+  }
+
+  // Open state - also green border when open
+  &--open {
+     border: 2px solid $df-primary-color;
+    
+    &:focus {
+       border: 2px solid $df-primary-color; 
+    }
+  }
+
+  // Error state
+  &.error {
+    border-color: $df-error-color;
+    
+    &:hover:not(.df-input-select-trigger--disabled) {
+      border:2px solid $df-error-color;
+      background: rgba($df-error-color, 0.08);
+    }
+    
+    &:focus {
+      border: 2px solid $df-error-color !important;
+        background: rgba($df-error-color, 0.08);
+    }
+    
+    &.df-input-select-trigger--open {
+      border: 2px solid $df-error-color !important;
+      background: rgba($df-error-color, 0.08);
+    }
+  }
+
+  // Dark theme
+  .df-dark-theme & {
+    background: $df-dark-cell-bg;
+    color: $df-dark-text;
+    border-color: $df-dark-border;
+
+    &:hover:not(.df-input-select-trigger--disabled) {
+      border-color: $df-primary-color-light;
+      background: rgba($df-primary-color-light, 0.12);
+    }
+
+    // FOCUS STATE IN DARK THEME - Green border
+    &:focus {
+      border-color: $df-primary-color-light !important;
+    }
+
+    &:active:not(.df-input-select-trigger--disabled) {
+      transform: translateY(1px);
+    }
+
+    &--open {
+      border-color: $df-primary-color-light !important;
+      
+      &:focus {
+        border-color: $df-primary-color-light !important;
+      }
+    }
+
+    &--disabled {
+      background-color: color.scale($df-dark-cell-bg, $lightness: 2%);
+      
+      &:focus {
+        border-color: $df-dark-border !important;
+        box-shadow: none;
+      }
+    }
+
+    &.error {
+      border-color: $df-dark-error;
+      
+      &:hover:not(.df-input-select-trigger--disabled) {
+        border-color: $df-dark-error;
+        background: rgba($df-dark-error, 0.12);
+      }
+      
+      &:focus {
+        border-color: $df-dark-error !important;
+      }
+      
+       // Open state in error - RED
+    &.df-input-select-trigger--open {
+      border: 2px solid $df-error-color !important;
+      background: rgba($df-error-color, 0.08);
+    }
+    
+    // Active state in error - RED
+    &:active:not(.df-input-select-trigger--disabled) {
+      background: rgba($df-error-color, 0.15);
+      border: 2px solid $df-error-color;
+    }
+    }
+  }
+}
+
+// ============================================================================
+// SELECTED VALUE & PLACEHOLDER
+// ============================================================================
+
+.df-input-select-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: $df-text-color;
+  font-weight: normal;
+}
+
+// PLACEHOLDER STYLING - matches InputDate placeholder
+.df-input-select-placeholder {
+  color: $df-placeholder-color !important;
+  font-weight: normal;
+  
+  .df-dark-theme & {
+    color: $df-dark-placeholder !important;
+  }
+}
+
+// ============================================================================
+// DROPDOWN ARROW
+// ============================================================================
+
+.df-input-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: $df-text-color;
+  opacity: 0.6;
+  font-size: 10px;
+  transition: transform $df-transition-speed $df-transition-timing;
+
+  .df-input-select-trigger:hover &,
+  .df-input-select-trigger:focus & {
+    color: $df-primary-color;
+    opacity: 1;
+  }
+
+  .df-input-select-trigger--open & {
+    transform: translateY(-50%) rotate(180deg);
+    color: $df-primary-color;
+    opacity: 1;
+  }
+
+  .df-input-select-trigger.error & {
+    color: $df-error-color !important;
+    opacity: 1;
+  }
+
+  .df-dark-theme & {
+    color: $df-dark-text;
+
+    .df-input-select-trigger:hover &,
+    .df-input-select-trigger:focus & {
+      color: $df-primary-color-light;
+    }
+
+    .df-input-select-trigger--open & {
+      color: $df-primary-color-light;
+    }
+  }
+}
+
+// ============================================================================
+// DROPDOWN OPTIONS MENU
+// ============================================================================
+
+.df-input-select-options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: $df-field-bg;
+  border: 1px solid $df-border-color;
+  border-radius: $df-border-radius-sm;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 250px;
+  overflow-y: auto;
+  animation: dropdownFadeIn $df-transition-speed $df-transition-timing;
+
+  @if mixin-exists(df-scrollbar) {
+    @include df-scrollbar(6px);
+  }
+
+  &--above {
+    top: auto;
+    bottom: calc(100% + 4px);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .df-dark-theme & {
+    background: color.scale($df-dark-cell-bg, $lightness: 5%);
+    border-color: $df-dark-border;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+    &--above {
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================================================
+// INDIVIDUAL OPTION ITEMS
+// ============================================================================
+
+.df-input-select-option {
+  padding: 10px 12px;
+  background: $df-field-bg;
+  color: $df-text-color;
+  cursor: pointer;
+  transition: all $df-transition-speed $df-transition-timing;
+  font-size: $df-font-size;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  display: block;
+
+  &:hover:not(.df-input-select-option--disabled) {
+    background: rgba($df-primary-color, 0.08);
+    color: $df-primary-color;
+  }
+
+  &:focus {
+    outline: none;
+    background: rgba($df-primary-color, 0.08);
+    color: $df-primary-color;
+  }
+
+  &:active:not(.df-input-select-option--disabled) {
+    background: rgba($df-primary-color, 0.15);
+  }
+
+  &--selected {
+    background: $df-primary-color;
+    color: white;
+    font-weight: $df-font-weight-semibold;
+
+    &:hover {
+      background: color.scale($df-primary-color, $lightness: 5%);
+      color: white;
+    }
+    
+    &:focus {
+      background: $df-primary-color;
+      color: white;
+    }
+  }
+
+  &:first-child {
+    border-top-left-radius: $df-border-radius-sm;
+    border-top-right-radius: $df-border-radius-sm;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: $df-border-radius-sm;
+    border-bottom-right-radius: $df-border-radius-sm;
+  }
+
+  .df-dark-theme & {
+    background: color.scale($df-dark-cell-bg, $lightness: 5%);
+    color: $df-dark-text;
+
+    &:hover:not(.df-input-select-option--disabled) {
+      background: rgba($df-primary-color-light, 0.12);
+      color: $df-primary-color-light;
+    }
+
+    &:focus {
+      background: rgba($df-primary-color-light, 0.12);
+      color: $df-primary-color-light;
+    }
+
+    &:active:not(.df-input-select-option--disabled) {
+      background: rgba($df-primary-color-light, 0.2);
+    }
+
+    &--selected {
+      background: $df-primary-color-light;
+      color: $df-dark-text;
+
+      &:hover {
+        background: color.scale($df-primary-color-light, $lightness: -5%);
+        color: $df-dark-text;
+      }
+      
+      &:focus {
+        background: $df-primary-color-light;
+        color: $df-dark-text;
+      }
+    }
+  }
+}
+
+// ============================================================================
+// ERROR MESSAGE
+// ============================================================================
+
+.df-input-select-error {
+  color: $df-error-color;
+  font-size: 0.85em;
+  margin: 0;
+  
+  .df-dark-theme & {
+    color: $df-dark-error;
+  }
+}
+
+// ============================================================================
+// ACCESSIBILITY & REDUCED MOTION
+// ============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .df-input-select-trigger,
+  .df-input-select-arrow,
+  .df-input-select-option {
+    transition: none;
+  }
+
+  .df-input-select-trigger:active:not(
+      .df-input-select-trigger--disabled
+    ) {
+    transform: none;
+  }
+
+  .df-input-select-arrow {
+    .df-input-select-trigger--open & {
+      transform: translateY(-50%);
+    }
+  }
+
+  .df-input-select-options {
+    animation: none;
+  }
+}
+
+// ============================================================================
+// PRINT STYLES
+// ============================================================================
+
+@media print {
+  .df-input-select-trigger {
+    border: 1px solid #ccc;
+    background: white;
+    color: black;
+  }
+  
+  .df-input-select-options {
+    display: none;
   }
 }

@@ -9,6 +9,7 @@ import Button from "../Button/Button";
 import InputText from "../InputText/InputText";
 import InputDate from "../InputDate/InputDate";
 import InputSelect from "../InputSelect/InputSelect";
+import Modal from "../Modal/Modal"; 
 import { departments, states } from "../../constants";
 import styles from "./EmployeeForm.module.scss";
 
@@ -28,6 +29,7 @@ const EmployeeForm = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleChangeInputText = (e) => {
     const { name, value } = e.target;
@@ -114,6 +116,7 @@ const EmployeeForm = () => {
         department: "",
       });
       setSubmitted(false);
+      setShowModal(true);
     } catch (err) {
       console.error("Error adding employee:", err);
       dispatch(addEmployeeFailed(err.message));
@@ -121,6 +124,7 @@ const EmployeeForm = () => {
   };
 
   return (
+    <>
     <form className={styles.formContainer} onSubmit={handleSubmit}>
       <InputText
         label="First Name"
@@ -199,8 +203,10 @@ const EmployeeForm = () => {
         }
         submitted={submitted}
       />
-      <Button type="submit">Save</Button>
+      <Button type="submit" >Save</Button>
     </form>
+    <Modal show={showModal} onClose={() => setShowModal(false)} />
+    </>
   );
 };
 

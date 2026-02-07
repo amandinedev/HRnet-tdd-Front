@@ -1,5 +1,4 @@
-// InputText.module.scss
-@use '../../sass/abstracts' as *;
+@use "../../sass/abstracts" as *;
 @use "sass:color";
 
 .df-input-text-container {
@@ -7,90 +6,307 @@
   flex-direction: column;
   gap: 8px;
   width: 100%;
+}
+
+.df-input-text-label {
+  font-weight: $df-font-weight-semibold;
+  color: $df-text-color;
+  font-size: 0.95em;
+  text-align: start;
   
-  .df-input-text-label {
-    font-weight: $df-font-weight-semibold;
-    color: $df-text-color;
-    font-size: 0.95em;
-    text-align: start;
+  &.required::after {
+    content: ' *';
+    color: $df-error-color;
+  }
+  
+  .df-dark-theme & {
+    color: $df-dark-text;
     
     &.required::after {
-      content: ' *';
-      color: $df-error-color;
+      color: $df-dark-error;
     }
+  }
+}
+
+.df-input-text-field {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid $df-border-color;
+  border-radius: $df-border-radius-sm;
+  font-family: $df-font-family;
+  font-size: $df-font-size;
+  background: $df-field-bg;
+  color: $df-text-color;
+  transition: all $df-transition-speed $df-transition-timing;
+  box-sizing: border-box;
+  
+  // Normal state with hover
+  &:not(:disabled):not(.error):hover {
+    border: 2px solid $df-primary-color;
+    background: rgba($df-primary-color, 0.08);
+    padding: 9px 11px;
+  }
+  
+  // Focus state for normal inputs
+  &:not(.error):focus,
+  &:not(.error):focus-visible {
+    outline: none;
+    border: 2px solid $df-primary-color;
+    background: rgba($df-primary-color, 0.08);
+    padding: 9px 11px;
+  }
+  
+  // Disabled state
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: color.scale($df-field-bg, $lightness: -5%);
     
-    .df-dark-theme & {
-      color: $df-dark-text;
-      
-      &.required::after {
-        color: $df-dark-error;
-      }
+    &:hover {
+      border: 1px solid $df-border-color;
+      background-color: color.scale($df-field-bg, $lightness: -5%);
+      padding: 10px 12px;
     }
   }
   
-  .df-input-text-field {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid $df-border-color;
-    border-radius: $df-border-radius-sm;
-    font-family: $df-font-family;
-    font-size: $df-font-size;
-    background: $df-field-bg;
-    color: $df-text-color;
-    transition: all $df-transition-speed $df-transition-timing;
-    box-sizing: border-box;
+  // Error state
+  &.error {
+    border: 1px solid $df-error-color;
+    color: $df-error-color;
     
-    // GREEN BORDER ON FOCUS
-    &:focus {
+    // Error hover state
+    &:not(:disabled):hover {
+      border: 2px solid $df-error-color;
+      background: rgba($df-error-color, 0.08);
+      padding: 9px 11px;
+    }
+    
+    // Error focus state
+    &:focus,
+    &:focus-visible {
       outline: none;
-      border-color: $df-primary-color;
-      box-shadow: 0 0 0 3px rgba($df-primary-color, 0.1);
+      border: 2px solid $df-error-color;
+      background: rgba($df-error-color, 0.08);
+      padding: 9px 11px;
+    }
+  }
+  
+  &::placeholder {
+    color: $df-placeholder-color;
+    font-weight: normal;
+  }
+  
+  // Keep minimal autofill styling - only for visual consistency
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px $df-field-bg inset;
+    -webkit-text-fill-color: $df-text-color;
+  }
+}
+
+.df-number-input-wrapper {
+  position: relative;
+  width: 100%;
+  
+  .df-input-text-field[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    padding-right: 35px;
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
     
-    &:hover:not(:focus) {
-      border-color: color.scale($df-border-color, $lightness: -10%);
+    &::-webkit-inner-spin-button {
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 35px;
+      cursor: pointer;
+      z-index: 2;
+    }
+  }
+}
+
+.df-number-arrows {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 1;
+  
+  .df-arrow-up,
+  .df-arrow-down {
+    color: rgba($df-text-color, 0.6);
+    font-size: 10px;
+    transition: color $df-transition-speed $df-transition-timing;
+    line-height: 1;
+  }
+}
+
+// Arrow colors for normal state
+.df-input-text-field:not(.error):hover ~ .df-number-arrows,
+.df-input-text-field:not(.error):focus ~ .df-number-arrows {
+  .df-arrow-up,
+  .df-arrow-down {
+    color: $df-primary-color;
+  }
+}
+
+// Arrow colors for error state
+.df-input-text-field.error:hover ~ .df-number-arrows,
+.df-input-text-field.error:focus ~ .df-number-arrows {
+  .df-arrow-up,
+  .df-arrow-down {
+    color: $df-error-color;
+  }
+}
+
+// Arrow colors for disabled state
+.df-input-text-field:disabled ~ .df-number-arrows {
+  .df-arrow-up,
+  .df-arrow-down {
+    opacity: 0.4;
+    color: rgba($df-text-color, 0.4);
+  }
+}
+
+.df-dark-theme {
+  .df-input-text-field {
+    background: $df-dark-cell-bg;
+    color: $df-dark-text;
+    border-color: $df-dark-border;
+    
+    // Normal state with hover in dark theme
+    &:not(:disabled):not(.error):hover {
+      border: 2px solid $df-primary-color-light;
+      background: rgba($df-primary-color-light, 0.12);
+      padding: 9px 11px;
     }
     
+    // Focus state in dark theme
+    &:not(.error):focus,
+    &:not(.error):focus-visible {
+      border: 2px solid $df-primary-color-light;
+      background: rgba($df-primary-color-light, 0.12);
+      padding: 9px 11px;
+    }
+    
+    // Disabled state in dark theme
+    &:disabled {
+      background-color: color.scale($df-dark-cell-bg, $lightness: 2%);
+      
+      &:hover {
+        border: 1px solid $df-dark-border;
+        background-color: color.scale($df-dark-cell-bg, $lightness: 2%);
+        padding: 10px 12px;
+      }
+    }
+    
+    // Error state in dark theme
     &.error {
-      border-color: $df-error-color;
+      border: 1px solid $df-dark-error;
+      color: $df-dark-error;
+      
+      &:not(:disabled):hover {
+        border: 2px solid $df-dark-error;
+        background: rgba($df-dark-error, 0.12);
+        padding: 9px 11px;
+      }
+      
+      &:focus,
+      &:focus-visible {
+        border: 2px solid $df-dark-error;
+        background: rgba($df-dark-error, 0.12);
+        padding: 9px 11px;
+      }
     }
     
     &::placeholder {
-      color: $df-placeholder-color;
+      color: $df-dark-placeholder;
     }
     
-    // Dark theme styles
-    .df-dark-theme & {
-      background: $df-dark-cell-bg;
-      color: $df-dark-text;
-      border-color: $df-dark-border;
-      
-      &:focus {
-        border-color: $df-primary-color-light;
-        box-shadow: 0 0 0 3px rgba($df-primary-color-light, 0.1);
-      }
-      
-      &:hover:not(:focus) {
-        border-color: color.scale($df-dark-border, $lightness: 10%);
-      }
-      
-      &.error {
-        border-color: $df-dark-error;
-      }
-      
-      &::placeholder {
-        color: $df-dark-placeholder;
-      }
+    // Minimal autofill for dark theme
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px $df-dark-cell-bg inset;
+      -webkit-text-fill-color: $df-dark-text;
     }
   }
   
-  .df-input-text-error {
-    color: $df-error-color;
-    font-size: 0.85em;
-    margin: 0;
-    
-    .df-dark-theme & {
+  // Arrow colors in dark theme
+  .df-number-arrows {
+    .df-arrow-up,
+    .df-arrow-down {
+      color: rgba($df-dark-text, 0.6);
+    }
+  }
+  
+  .df-input-text-field:not(.error):hover ~ .df-number-arrows,
+  .df-input-text-field:not(.error):focus ~ .df-number-arrows {
+    .df-arrow-up,
+    .df-arrow-down {
+      color: $df-primary-color-light;
+    }
+  }
+  
+  .df-input-text-field.error:hover ~ .df-number-arrows,
+  .df-input-text-field.error:focus ~ .df-number-arrows {
+    .df-arrow-up,
+    .df-arrow-down {
       color: $df-dark-error;
     }
+  }
+  
+  .df-input-text-field:disabled ~ .df-number-arrows {
+    .df-arrow-up,
+    .df-arrow-down {
+      color: rgba($df-dark-text, 0.4);
+    }
+  }
+}
+
+.df-input-text-error {
+  color: $df-error-color;
+  font-size: 0.85em;
+  margin: 0;
+  
+  .df-dark-theme & {
+    color: $df-dark-error;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .df-input-text-field,
+  .df-number-arrows .df-arrow-up,
+  .df-number-arrows .df-arrow-down {
+    transition: none;
+  }
+}
+
+@media print {
+  .df-input-text-field {
+    border: 1px solid #ccc;
+    background: white;
+    color: black;
+    
+    &.error {
+      border-color: #990000;
+      color: #990000;
+    }
+  }
+  
+  .df-number-arrows {
+    display: none;
   }
 }

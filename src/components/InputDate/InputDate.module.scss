@@ -1,104 +1,187 @@
-// InputDate.module.scss
-@use '../../sass/abstracts' as *;
+@use "../../sass/abstracts" as *;
 @use "sass:color";
 
 .df-input-date-container {
   display: flex;
   flex-direction: column;
   gap: $df-padding-sm;
-  width: 100%; // Make it full width
-  
+  width: 100%;
+
   .df-input-date-label {
     font-weight: $df-font-weight-semibold;
     color: $df-text-color;
     font-size: 0.95em;
     text-align: start;
-    
+
     &.required::after {
-      content: ' *';
+      content: " *";
       color: $df-error-color;
     }
-    
+
     .df-dark-theme & {
       color: $df-dark-text;
-      
+
       &.required::after {
         color: $df-dark-error;
       }
     }
   }
-  
-  :global(.react-datepicker-wrapper) {
-    width: 100%; // Make datepicker wrapper full width
-  }
-  
-  :global(.react-datepicker__input-container) {
-    width: 100%; // Make input container full width
+
+  .df-datepicker-wrapper {
+    width: 100%;
     
-    input {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid $df-border-color;
-      border-radius: $df-border-radius-sm;
-      font-family: inherit;
-      font-size: $df-font-size;
-      background: $df-field-bg ;
-      color: $df-text-color;
-      transition: all $df-transition-speed $df-transition-timing;
-      box-sizing: border-box;
-      
-      // GREEN BORDER ON FOCUS
-      &:focus {
-        outline: none;
-        border-color: $df-primary-color;
-        box-shadow: 0 0 0 3px rgba($df-primary-color, 0.1);
+    // Target the react-datepicker input
+    :global {
+      .react-datepicker-wrapper {
+        width: 100%;
       }
-      
-      &:hover:not(:focus) {
-        border-color: color.scale($df-border-color, $lightness: -10%);
-      }
-      
-      &.error {
-        border-color: $df-error-color;
-      }
-      
-      &::placeholder {
-        color: $df-placeholder-color;
-      }
-      
-      .df-dark-theme & {
-        background: $df-dark-cell-bg;
-        color: $df-dark-text;
-        border-color: $df-dark-border;
+
+      .react-datepicker__input-container {
+        width: 100%;
         
-        &:focus {
-          border-color: $df-primary-color-light;
-          box-shadow: 0 0 0 3px rgba($df-primary-color-light, 0.1);
-        }
-        
-        &:hover:not(:focus) {
-          border-color: color.scale($df-dark-border, $lightness: 10%);
-        }
-        
-        &.error {
-          border-color: $df-dark-error;
-        }
-        
-        &::placeholder {
-          color: $df-dark-placeholder;
+        input {
+          width: 100%;
+          padding: 10px 12px;
+          border: 1px solid $df-border-color;
+          border-radius: $df-border-radius-sm;
+          font-family: $df-font-family;
+          font-size: $df-font-size;
+          background: $df-field-bg;
+          color: $df-text-color;
+          transition: all $df-transition-speed $df-transition-timing;
+          box-sizing: border-box;
+          
+          // Normal state hover
+          &:hover:not(:focus) {
+            border: 2px solid $df-primary-color;
+            background: rgba($df-primary-color, 0.08);
+          }
+          
+          // Focus state
+          &:focus {
+            outline: none;
+            border: 2px solid $df-primary-color;
+            background: rgba($df-primary-color, 0.08);
+          }
+          
+          &:hover:focus {
+            border: 2px solid $df-primary-color;
+            background: rgba($df-primary-color, 0.12);
+          }
+
+          &::placeholder {
+            color: $df-placeholder-color;
+          }
+          
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background-color: color.scale($df-field-bg, $lightness: -5%);
+            
+            &:hover,
+            &:focus {
+              border-color: $df-border-color;
+              background-color: color.scale($df-field-bg, $lightness: -5%);
+            }
+          }
+          
+          // Dark theme styles
+          .df-dark-theme & {
+            background: $df-dark-cell-bg;
+            color: $df-dark-text;
+            border-color: $df-dark-border;
+            
+            &:hover:not(:focus) {
+              border: 2px solid $df-primary-color-light;
+              background: rgba($df-primary-color-light, 0.12);
+            }
+            
+            &:focus {
+              border: 2px solid $df-primary-color-light;
+              background: rgba($df-primary-color-light, 0.12);
+            }
+            
+            &:hover:focus {
+              border: 2px solid $df-primary-color-light;
+              background: rgba($df-primary-color-light, 0.16);
+            }
+            
+            &::placeholder {
+              color: $df-dark-placeholder;
+            }
+          }
         }
       }
     }
   }
-  
+
+  // Error class for the input (applied when there's an error)
+  .df-input-error {
+    border: 1px solid $df-error-color !important;
+    
+    &:hover:not(:focus) {
+      border: 2px solid $df-error-color !important;
+      background: rgba($df-error-color, 0.12) !important;
+    }
+    
+    &:focus {
+      border: 2px solid $df-error-color !important;
+      background: rgba($df-error-color, 0.12) !important;
+      outline: none !important;
+    }
+    
+    &:hover:focus {
+      border: 2px solid $df-error-color !important;
+      background: rgba($df-error-color, 0.16) !important;
+    }
+    
+    // Dark theme error state
+    .df-dark-theme & {
+      border: 1px solid $df-dark-error !important;
+      background: rgba($df-dark-error, 0.12) !important;
+      
+      &:hover:not(:focus) {
+        border: 2px solid $df-dark-error !important;
+        background: rgba($df-dark-error, 0.16) !important;
+      }
+      
+      &:focus {
+        border: 2px solid $df-dark-error !important;
+        background: rgba($df-dark-error, 0.16) !important;
+        outline: none !important;
+      }
+      
+      &:hover:focus {
+        border: 2px solid $df-dark-error !important;
+        background: rgba($df-dark-error, 0.20) !important;
+      }
+    }
+  }
+
   .df-input-date-error {
     color: $df-error-color;
     font-size: 0.85em;
     margin: 0;
-    text-align: start;
     
     .df-dark-theme & {
       color: $df-dark-error;
     }
   }
 }
+
+ :global {
+  .react-datepicker__header{
+    background-color: $df-primary-color;
+  }
+  .react-datepicker__current-month{
+    color: white;   
+  }
+  .react-datepicker__day--selected {
+        background-color: $df-primary-color;
+        color: white;            
+
+        &:not([aria-disabled="true"]):hover {
+            background: color.scale($df-primary-color, $lightness: -10%);
+        }
+      }
+    }

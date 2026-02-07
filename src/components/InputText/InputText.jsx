@@ -24,15 +24,34 @@ const InputText = ({
       >
         {label}
       </label>
-      <input
-        className={`${styles['df-input-text-field']} ${isError ? styles.error : ''}`}
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-        {...props}
-      />
+      {type === "number" ? (
+        <div className={styles['df-number-input-wrapper']}>
+          <input
+            className={`${styles['df-input-text-field']} ${isError ? styles.error : ''}`}
+            type={type}
+            id={id}
+            name={name}
+            value={value}
+            onChange={onChange}
+            {...props}
+          />
+          <div className={styles['df-number-arrows']}>
+            <span className={styles['df-arrow-up']}>▲</span>
+            <span className={styles['df-arrow-down']}>▼</span>
+          </div>
+        </div>
+      ) : (
+        <input
+          className={`${styles['df-input-text-field']} ${isError ? styles.error : ''}`}
+          type={type}
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          {...props}
+        />
+      )}
+      
       {isError && (
         <p className={styles['df-input-text-error']}>
           Please fill in this field

@@ -11,31 +11,32 @@ const InputDate = ({
   submitted, 
   className = "",
   required = false,
+  id,
   ...props 
 }) => {
-  const isError = dateValue === null;
+  const isError = submitted && dateValue === null;
 
   return (
     <div className={`${styles['df-input-date-container']} ${className}`}>
       {label && (
         <label 
           className={`${styles['df-input-date-label']} ${required ? styles.required : ''}`} 
-          htmlFor={label}
+          htmlFor={id}
         >
           {label}
         </label>
       )}
       <DatePicker
-        className={isError && submitted ? 'error' : ''}
-        id={label}
+        id={id}
         selected={dateValue}
         onChange={handleChange}
         dateFormat="MM/dd/yyyy"
         placeholderText="Select a date"
+        className={isError ? styles['df-input-error'] : ''}
         wrapperClassName={styles['df-datepicker-wrapper']}
         {...props}
       />
-      {submitted && isError && (
+      {isError && (
         <p className={styles['df-input-date-error']}>
           Please select a date
         </p>

@@ -1,6 +1,6 @@
 @use "../../sass/abstracts" as *;
 
-button {
+.greenButton {
   @include df-button;
   width: 100%;
 }

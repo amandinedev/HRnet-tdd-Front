@@ -1,9 +1,9 @@
 // Button.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "./Button.module.scss";
+import styles from "./Button.module.scss";
 
-const Button = ({ type, to, children, onClick, disabled, className = '' }) => {
+const Button = ({ type, to, children, onClick, disabled, className = styles.greenButton }) => {
 
   
   // If it's a regular button

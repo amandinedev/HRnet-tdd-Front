@@ -6,14 +6,14 @@ import styles from "./HomePage.module.scss";
 
 const Home = () => {
   return (
-    <div className={styles.homeContainer}>
+    <main className={styles.homeContainer}>
       <div>
         <h1>HRnet</h1>
         <Link to="/employee-list" tabIndex={0} className={styles.linkButton}>View Current Employees</Link>
         <h2>Create Employee</h2>
       </div>
       <EmployeeForm />
-    </div>
+    </main>
   );
 };
 

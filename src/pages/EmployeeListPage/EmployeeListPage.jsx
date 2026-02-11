@@ -57,7 +57,7 @@ const EmployeeListPage = () => {
   ];
 
   return (
-    <div className="employee-list-container">
+    <main className="employee-list-container">
       <header className="page-header">
         <h1>Current Employees</h1>
         <p className="page-subtitle">
@@ -87,7 +87,7 @@ const EmployeeListPage = () => {
       <Link to="/" className="linkButton" tabIndex={0}>
         Home
       </Link>
-    </div>
+    </main>
   );
 };
 

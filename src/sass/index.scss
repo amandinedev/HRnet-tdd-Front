@@ -1,5 +1,6 @@
 
 @use '../sass/abstracts' as *;
+@use "sass:color";
 
 
 html {
@@ -28,4 +29,54 @@ body {
 #root {
   height: 100%;
   width: 100vw;
+}
+
+// ============================================================================
+// Global styles for React DatePicker 
+// ============================================================================
+
+.react-datepicker__header {
+  background-color: $df-primary-color !important;
+}
+
+.react-datepicker__current-month {
+  color: white !important;   
+}
+
+.react-datepicker__day--selected, .react-datepicker__day--keyboard-selected {
+  background-color: $df-primary-color !important;
+  color: white !important;            
+}
+
+.react-datepicker__day--selected:not([aria-disabled="true"]):hover {
+  background-color: color.scale($df-primary-color, $lightness: -10%);
+}
+
+/* Dark theme support */
+.df-dark-theme .react-datepicker__header {
+  background-color: $df-primary-color-light !important;
+}
+
+.df-dark-theme .react-datepicker__day--selected {
+  background-color: $df-primary-color-light !important;
+}
+
+.df-dark-theme .react-datepicker__day--selected:not([aria-disabled="true"]):hover {
+  background-color: color.scale($df-primary-color-light, $lightness: -10%) !important;
+}
+
+/* Basic DatePicker styling */
+.react-datepicker {
+  font-family: var(--df-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif) !important;
+  border: 1px solid var(--df-border-color, #ccc) !important;
+  border-radius: var(--df-border-radius-sm, 4px) !important;
+}
+
+.react-datepicker__triangle {
+  display: none !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: color.scale($df-primary-color, $lightness: -10%) !important;
+  color: white !important;
 }

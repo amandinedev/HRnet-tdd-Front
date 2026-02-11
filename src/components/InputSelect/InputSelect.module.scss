@@ -1,6 +1,6 @@
-// InputSelect.module.scss - FOCUS WITH GREEN BORDER
 @use '../../sass/abstracts' as *;
 @use "sass:color";
+@use "sass:meta";
 
 .df-input-select-container {
   display: flex;
@@ -271,9 +271,9 @@
   overflow-y: auto;
   animation: dropdownFadeIn $df-transition-speed $df-transition-timing;
 
-  @if mixin-exists(df-scrollbar) {
-    @include df-scrollbar(6px);
-  }
+  @if meta.mixin-exists(df-scrollbar) {
+  @include df-scrollbar(6px);
+}
 
   &--above {
     top: auto;

@@ -1,44 +1,90 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import DatePicker from 'react-datepicker';
-import InputDate from '../components/InputDate/InputDate'; // Adjust the import path accordingly
-import 'react-datepicker/dist/react-datepicker.css';
+import InputDate from '../components/InputDate/InputDate';
 
 describe('InputDate', () => {
-  it('renders label and date picker correctly', () => {
-    render(<InputDate id="date-of-birth" />);
+  // Test basic rendering
+  it('renders with label and placeholder', () => {
+    const handleChange = vi.fn();
+    
+    render(
+      <InputDate 
+        label="Date of Birth" 
+        dateValue={null} 
+        handleChange={handleChange}
+        submitted={false}
+        required={true}
+      />
+    );
 
+    expect(screen.getByText('Date of Birth')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Select a date')).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 
-  it('shows error message for field submitted without value', async () => {
+  // Test error states
+  it('shows error when submitted with null value and required', () => {
     const handleChange = vi.fn();
 
-    render(
-      <div>
-        <label htmlFor="date-of-birth">Date of Birth</label>
-        <InputDate id="date-of-birth" dateValue={null} handleChange={handleChange} submitted={true} />
-      </div>
+    const { rerender } = render(
+      <InputDate 
+        label="Date of Birth" 
+        dateValue={null} 
+        handleChange={handleChange}
+        submitted={false}
+        required={true}
+      />
     );
 
-    // Simulate blur event
-    screen.getByRole('textbox').blur();
-    userEvent.click(document.body); // Trigger blur event
+    // No error initially
+    expect(screen.queryByText('Please select a date')).not.toBeInTheDocument();
 
+    // Rerender with submitted=true
+    rerender(
+      <InputDate 
+        label="Date of Birth" 
+        dateValue={null} 
+        handleChange={handleChange}
+        submitted={true}
+        required={true}
+      />
+    );
+
+    // Error shows after submission
     expect(screen.getByText('Please select a date')).toBeInTheDocument();
   });
 
-  it('does not show error message when date is selected', () => {
+  it('does not show error when date has value', () => {
     const handleChange = vi.fn();
+    const testDate = new Date('2023-01-01');
 
     render(
-      <div>
-        <label htmlFor="date-of-birth">Date of Birth</label>
-        <InputDate id="date-of-birth" dateValue={new Date()} handleChange={handleChange} submitted={true} />
-      </div>
+      <InputDate 
+        label="Date of Birth" 
+        dateValue={testDate} 
+        handleChange={handleChange}
+        submitted={true}
+        required={true}
+      />
     );
 
     expect(screen.queryByText('Please select a date')).not.toBeInTheDocument();
   });
+
+  it('does not show error when not required', () => {
+    const handleChange = vi.fn();
+
+    render(
+      <InputDate 
+        label="Date of Birth" 
+        dateValue={null} 
+        handleChange={handleChange}
+        submitted={true}
+        required={false}
+      />
+    );
+
+    expect(screen.queryByText('Please select a date')).not.toBeInTheDocument();
+  });
+
 });

@@ -1,6 +1,6 @@
-// InputSelect.jsx - Updated to handle placeholder styling
-import React, { useState, useRef, useEffect } from 'react';
-import styles from './InputSelect.module.scss';
+import React, { useState, useRef, useEffect } from "react";
+import { toCamelCase } from "../../utils/utils";
+import styles from "./InputSelect.module.scss";
 
 const InputSelect = ({
   data,
@@ -16,7 +16,7 @@ const InputSelect = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef(null);
-  const isError = submitted && selectedValue === '';
+  const isError = required && submitted && selectedValue === "";
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -26,23 +26,23 @@ const InputSelect = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
   // Close dropdown on Escape key
   useEffect(() => {
     const handleEscapeKey = (event) => {
-      if (event.key === 'Escape' && isOpen) {
+      if (event.key === "Escape" && isOpen) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [isOpen]);
 
@@ -61,33 +61,31 @@ const InputSelect = ({
 
   // Find selected item for display
   const getSelectedLabel = () => {
-    if (selectedValue === '') return placeholder;
-    const selectedItem = data.find(item => item.name === selectedValue || item.value === selectedValue);
-    return selectedItem ? (selectedItem.label || selectedItem.name) : placeholder;
+    if (selectedValue === "") return placeholder;
+    const selectedItem = data.find(
+      (item) => item.name === selectedValue || item.value === selectedValue,
+    );
+    return selectedItem ? selectedItem.label || selectedItem.name : placeholder;
   };
 
   // Check if current value is placeholder
-  const isPlaceholder = selectedValue === '';
+  const isPlaceholder = selectedValue === "";
 
   // Keyboard navigation
   const handleKeyDown = (event) => {
     if (disabled) return;
-    
+
     switch (event.key) {
-      case 'Enter':
-      case ' ':
+      case "Enter":
+      case " ":
         event.preventDefault();
         setIsOpen(!isOpen);
         break;
-      case 'Escape':
+      case "Escape":
         setIsOpen(false);
         break;
-      case 'ArrowDown':
-        if (!isOpen) {
-          setIsOpen(true);
-        }
-        break;
-      case 'ArrowUp':
+      case "ArrowDown":
+      case "ArrowUp":
         if (!isOpen) {
           setIsOpen(true);
         }
@@ -98,32 +96,35 @@ const InputSelect = ({
   };
 
   const triggerClasses = [
-    styles['df-input-select-trigger'],
-    isOpen ? styles['df-input-select-trigger--open'] : '',
-    disabled ? styles['df-input-select-trigger--disabled'] : '',
-    isError ? styles.error : ''
-  ].filter(Boolean).join(' ');
+    styles["df-input-select-trigger"],
+    isOpen ? styles["df-input-select-trigger--open"] : "",
+    disabled ? styles["df-input-select-trigger--disabled"] : "",
+    isError ? styles.error : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const valueClasses = [
-    styles['df-input-select-value'],
-    isPlaceholder ? styles['df-input-select-placeholder'] : ''
-  ].filter(Boolean).join(' ');
+    styles["df-input-select-value"],
+    isPlaceholder ? styles["df-input-select-placeholder"] : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const formattedId = toCamelCase(label);
 
   return (
-    <div className={`${styles['df-input-select-container']} ${className}`}>
+    <div className={`${styles["df-input-select-container"]} ${className}`}>
       {label && (
-        <label 
-          className={`${styles['df-input-select-label']} ${required ? styles.required : ''}`} 
-          htmlFor={label}
+        <label
+          className={`${styles["df-input-select-label"]} ${required ? styles.required : ""}`}
+          htmlFor={formattedId}
         >
           {label}
         </label>
       )}
-      
-      <div 
-        ref={wrapperRef}
-        className={styles['df-input-select-wrapper']}
-      >
+
+      <div ref={wrapperRef} className={styles["df-input-select-wrapper"]}>
         <button
           type="button"
           className={triggerClasses}
@@ -134,29 +135,27 @@ const InputSelect = ({
           aria-expanded={isOpen}
           aria-labelledby={label}
           aria-invalid={isError}
-          id={label}
-          data-testid="input-select-trigger"
+          id={formattedId}
+          data-testid={`input-select-trigger-${formattedId}`}
           {...props}
         >
-          <span className={valueClasses}>
-            {getSelectedLabel()}
-          </span>
-          <span className={styles['df-input-select-arrow']} aria-hidden="true">
+          <span className={valueClasses}>{getSelectedLabel()}</span>
+          <span className={styles["df-input-select-arrow"]} aria-hidden="true">
             ▼
           </span>
         </button>
-        
+
         {isOpen && !disabled && (
-          <div 
-            className={styles['df-input-select-options']}
+          <div
+            className={styles["df-input-select-options"]}
             role="listbox"
             aria-label={`${label} options`}
-            data-testid="input-select-options"
+            data-testid={`input-select-options-${formattedId}`}
           >
             <button
               type="button"
-              className={`${styles['df-input-select-option']} ${isPlaceholder ? styles['df-input-select-option--selected'] : ''}`}
-              onClick={() => handleOptionClick('')}
+              className={`${styles["df-input-select-option"]} ${isPlaceholder ? styles["df-input-select-option--selected"] : ""}`}
+              onClick={() => handleOptionClick("")}
               role="option"
               aria-selected={isPlaceholder}
             >
@@ -166,12 +165,12 @@ const InputSelect = ({
               const value = item.value || item.name;
               const label = item.label || item.name;
               const isSelected = selectedValue === value;
-              
+
               return (
                 <button
                   key={value}
                   type="button"
-                  className={`${styles['df-input-select-option']} ${isSelected ? styles['df-input-select-option--selected'] : ''}`}
+                  className={`${styles["df-input-select-option"]} ${isSelected ? styles["df-input-select-option--selected"] : ""}`}
                   onClick={() => handleOptionClick(value)}
                   role="option"
                   aria-selected={isSelected}
@@ -184,9 +183,12 @@ const InputSelect = ({
           </div>
         )}
       </div>
-      
+
       {isError && (
-        <p className={styles['df-input-select-error']}>
+        <p
+          className={styles["df-input-select-error"]}
+          data-testid={`error-select-${formattedId}`} // Dynamic error test ID
+        >
           Please select an option
         </p>
       )}

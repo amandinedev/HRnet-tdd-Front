@@ -33,7 +33,8 @@ const EmployeeForm = () => {
   const [fieldErrors, setFieldErrors] = useState({
     firstName: "",
     lastName: "",
-    street: "",  // ADDED THIS
+    street: "",  
+    city: "",
     zipCode: "",
   });
 
@@ -47,9 +48,9 @@ const EmployeeForm = () => {
 
   const validateStreet = (street) => {
     if (!street.trim()) return "Please fill in this field";
-    const streetRegex = /^[\p{Letter}\p{N}\s\-,.'#&()/_@%!?:;"+=]+$/u;
+    const streetRegex = /^[^\p{C}]+$/u;
     if (!streetRegex.test(street))
-      return "Invalid street address. Use only letters, numbers, spaces, and common punctuation (,.-'#&/)";
+      return "Please enter a valid street address";
     return "";
   };
 
@@ -57,7 +58,7 @@ const validateCity = (city) => {
   if (!city.trim()) return "Please fill in this field";
   const cityRegex = /^[\p{Letter}\s\-.'()]+$/u;
   if (!cityRegex.test(city))
-    return "Invalid city name. Use only letters, spaces, hyphens, apostrophes, and periods.";
+    return "Please enter a valid city name. Only letters, spaces, hyphens, apostrophes, and periods are allowed.";
   return "";
 };
 

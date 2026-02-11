@@ -7,9 +7,9 @@ const Modal = ({ show, onClose }) => {
 
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
-        <p>Employee has been successfully added!</p>
-        <Button onClick={onClose}>Close</Button>
+      <div className={styles.modalContent} data-testid="success-modal">
+        <p data-testid="modal-message">Employee has been successfully added!</p>
+        <Button onClick={onClose} data-testid="modal-close-button">Close</Button>
       </div>
     </div>
   );

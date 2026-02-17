@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../Button/Button";
 import styles from "./Modal.module.scss";
 
 const Modal = ({ show, onClose }) => {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (show) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [show, onClose]);
+
   if (!show) return null;
 
   return (

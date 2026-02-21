@@ -19,17 +19,17 @@ const CustomFooter = ({ onChange, date, setCalendarDate }) => {
   };
 
   // ===== RENDER =====
-return (
-  <div className={styles["df-custom-footer"]}>
-    <button
-      type="button"
-      className={styles["df-today-button"]}
-      onClick={handleTodayClick}
-    >
-      Today
-    </button>
-  </div>
-);
+  return (
+    <div className={styles["df-custom-footer"]}>
+      <button
+        type="button"
+        className={styles["df-today-button"]}
+        onClick={handleTodayClick}
+      >
+        Today
+      </button>
+    </div>
+  );
 };
 
 CustomFooter.propTypes = {
@@ -39,7 +39,7 @@ CustomFooter.propTypes = {
 };
 
 /**
- * InputDate component - A wrapper around react-datepicker with label, 
+ * InputDate component - A wrapper around react-datepicker with label,
  * error handling, and custom footer.
  */
 const InputDate = ({
@@ -56,7 +56,7 @@ const InputDate = ({
 }) => {
   // ===== REFS =====
   const datePickerRef = useRef(null);
-  
+
   // ===== DERIVED VALUES =====
   const isError = required && submitted && dateValue === null;
   const formattedId = toCamelCase(label);
@@ -76,7 +76,7 @@ const InputDate = ({
 
   // ===== RENDER =====
   return (
-    <div 
+    <div
       className={`${styles["df-input-date-container"]} ${className}`}
       data-testid={`container-${testId}`}
     >
@@ -103,15 +103,15 @@ const InputDate = ({
           wrapperClassName={styles["df-datepicker-wrapper"]}
           showYearDropdown={showYearDropdown}
           showMonthDropdown={showMonthDropdown}
-          dropdownMode={dropdownMode} 
+          dropdownMode={dropdownMode}
           yearDropdownItemNumber={100}
           scrollableYearDropdown={true}
-          scrollableMonthDropdown={true} 
+          scrollableMonthDropdown={true}
           {...props}
         >
-          <CustomFooter 
-            onChange={handleChange} 
-            date={dateValue} 
+          <CustomFooter
+            onChange={handleChange}
+            date={dateValue}
             setCalendarDate={setCalendarDate}
           />
         </DatePicker>

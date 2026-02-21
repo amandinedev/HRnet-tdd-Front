@@ -1,11 +1,11 @@
-@use '../../sass/abstracts' as *;
+@use "../../sass/abstracts" as *;
 @use "sass:color";
 
 // ============================================================================
 // FORM CONTAINER
 // ============================================================================
 .formContainer {
-  @include df-form-container; 
+  @include df-form-container;
   gap: 24px;
 }
 
@@ -22,16 +22,5 @@ fieldset.address {
   legend {
     font-size: 18px;
     font-weight: $df-font-weight-semibold;
-  }
-}
-
-// ============================================================================
-// DARK THEME
-// ============================================================================
-.dark-theme {
-  @include df-dark-form-card;
-  
-  fieldset.address {
-    @include df-fieldset-styles(dark);
   }
 }

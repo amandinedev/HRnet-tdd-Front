@@ -1,3 +1,9 @@
+@use "../../sass/abstracts" as *;
+@use "sass:color";
+
+// ============================================================================
+// MODAL OVERLAY
+// ============================================================================
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -11,6 +17,9 @@
   z-index: 1000;
 }
 
+// ============================================================================
+// MODAL CONTENT
+// ============================================================================
 .modalContent {
   background-color: white;
   padding: 20px;
@@ -19,8 +28,50 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1001;
 
+  // ============================================================================
+  // MODAL CLOSE BUTTON
+  // ============================================================================
+  .modalClose {
+    display: flex;
+    justify-self: end;
+    border: 1px solid $df-border-color;
+    border-radius: $df-border-radius-sm;
+    background: $df-field-bg;
+    color: $df-text-color;
+    font-family: $df-font-family;
+    font-size: $df-font-size;
+
+    &:hover:not(.df-input-select-trigger--disabled) {
+      border: 2px solid $df-primary-color;
+      background: rgba($df-primary-color, 0.08);
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid $df-primary-color;
+      background: rgba($df-primary-color, 0.08);
+    }
+
+    &:active:not(.df-input-select-trigger--disabled) {
+      transform: translateY(1px);
+    }
+
+    &--disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background-color: color.scale($df-field-bg, $lightness: -5%);
+
+      &:focus {
+        border-color: $df-border-color !important;
+        box-shadow: none;
+      }
+    }
+  }
+
+  // ============================================================================
+  // MODAL ACTION BUTTONS
+  // ============================================================================
   button {
-    margin-top: 16px;
     padding: 8px 16px;
     cursor: pointer;
   }

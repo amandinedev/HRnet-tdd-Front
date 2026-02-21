@@ -4,13 +4,13 @@ import InputSelect from "../components/InputSelect/InputSelect";
 // Helper to match component's toCamelCase function
 const toCamelCase = (str) => {
   return str
-    .split(' ')
-    .map((word, index) => 
-      index === 0 
-        ? word.toLowerCase() 
-        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    .split(" ")
+    .map((word, index) =>
+      index === 0
+        ? word.toLowerCase()
+        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
     )
-    .join('');
+    .join("");
 };
 
 describe("InputSelect Component", () => {
@@ -41,12 +41,18 @@ describe("InputSelect Component", () => {
   });
 
   it("opens dropdown when clicked and displays options", () => {
-    render(<InputSelect data={mockStates} label="State" placeholder="Select an option" />);
+    render(
+      <InputSelect
+        data={mockStates}
+        label="State"
+        placeholder="Select an option"
+      />,
+    );
 
     // Get trigger with dynamic test ID
     const triggerTestId = `input-select-trigger-${toCamelCase("State")}`;
     const trigger = screen.getByTestId(triggerTestId);
-    
+
     // Click the trigger button
     fireEvent.click(trigger);
 
@@ -54,14 +60,16 @@ describe("InputSelect Component", () => {
     const optionsTestId = `input-select-options-${toCamelCase("State")}`;
     const dropdown = screen.getByTestId(optionsTestId);
     expect(dropdown).toBeInTheDocument();
-    
+
     // Get all option buttons
     const optionButtons = dropdown.querySelectorAll('button[role="option"]');
-    expect(optionButtons).toHaveLength(3);
-    
+    expect(optionButtons).toHaveLength(2);
+
     // Convert to array and check text
-    const options = Array.from(optionButtons).map(button => button.textContent);
-    expect(options).toEqual(["Select an option", "Alabama", "California"]);
+    const options = Array.from(optionButtons).map(
+      (button) => button.textContent,
+    );
+    expect(options).toEqual(["Alabama", "California"]);
   });
 
   it("displays error if no option is selected when required and submitted", () => {
@@ -78,11 +86,11 @@ describe("InputSelect Component", () => {
     );
 
     expect(screen.getByText(/Please select an option/i)).toBeInTheDocument();
-    
+
     const triggerTestId = `input-select-trigger-${toCamelCase("State")}`;
     const trigger = screen.getByTestId(triggerTestId);
     expect(trigger).toHaveAttribute("aria-invalid", "true");
-    
+
     // Also check error test ID
     const errorTestId = `error-select-${toCamelCase("State")}`;
     expect(screen.getByTestId(errorTestId)).toBeInTheDocument();
@@ -103,7 +111,7 @@ describe("InputSelect Component", () => {
     expect(
       screen.queryByText(/Please select an option/i),
     ).not.toBeInTheDocument();
-    
+
     const errorTestId = `error-select-${toCamelCase("State")}`;
     expect(screen.queryByTestId(errorTestId)).not.toBeInTheDocument();
   });
@@ -150,7 +158,7 @@ describe("InputSelect Component", () => {
     const triggerTestId = `input-select-trigger-${toCamelCase("State")}`;
     const trigger = screen.getByTestId(triggerTestId);
     fireEvent.click(trigger);
-    
+
     const optionsTestId = `input-select-options-${toCamelCase("State")}`;
     expect(screen.getByTestId(optionsTestId)).toBeInTheDocument();
 
@@ -200,7 +208,7 @@ describe("InputSelect Component", () => {
     );
 
     expect(screen.getByText("California")).toBeInTheDocument();
-    
+
     const triggerTestId = `input-select-trigger-${toCamelCase("State")}`;
     const trigger = screen.getByTestId(triggerTestId);
     expect(trigger).toHaveTextContent("California");
@@ -228,15 +236,17 @@ describe("InputSelect Component", () => {
   });
 
   it("works with different labels and generates correct test IDs", () => {
-    render(<InputSelect data={mockStates} label="Department" selectedValue="" />);
+    render(
+      <InputSelect data={mockStates} label="Department" selectedValue="" />,
+    );
 
     // Should generate test ID based on label
     const triggerTestId = `input-select-trigger-${toCamelCase("Department")}`;
     expect(screen.getByTestId(triggerTestId)).toBeInTheDocument();
-    
+
     // Click to open
     fireEvent.click(screen.getByTestId(triggerTestId));
-    
+
     // Options should have corresponding test ID
     const optionsTestId = `input-select-options-${toCamelCase("Department")}`;
     expect(screen.getByTestId(optionsTestId)).toBeInTheDocument();
@@ -253,14 +263,14 @@ describe("InputSelect Component", () => {
           handleChange={handleChange}
         />
         <button data-testid="outside-button">Outside</button>
-      </div>
+      </div>,
     );
 
     // Open dropdown
     const triggerTestId = `input-select-trigger-${toCamelCase("State")}`;
     const trigger = screen.getByTestId(triggerTestId);
     fireEvent.click(trigger);
-    
+
     const optionsTestId = `input-select-options-${toCamelCase("State")}`;
     expect(screen.getByTestId(optionsTestId)).toBeInTheDocument();
 

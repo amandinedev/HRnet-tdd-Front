@@ -31,7 +31,7 @@
 // ============================================================================
 .df-datepicker-wrapper {
   width: 100%;
-  
+
   :global {
     .react-datepicker-wrapper {
       width: 100%;
@@ -39,7 +39,7 @@
 
     .react-datepicker__input-container {
       width: 100%;
-      
+
       input {
         width: 100%;
         padding: 10px 12px;
@@ -51,18 +51,18 @@
         color: $df-text-color;
         transition: all $df-transition-speed $df-transition-timing;
         box-sizing: border-box;
-        
+
         &:hover:not(:focus) {
           border: 2px solid $df-primary-color;
           background: rgba($df-primary-color, 0.08);
         }
-        
+
         &:focus {
           outline: none;
           border: 2px solid $df-primary-color;
           background: rgba($df-primary-color, 0.08);
         }
-        
+
         &:hover:focus {
           border: 2px solid $df-primary-color;
           background: rgba($df-primary-color, 0.12);
@@ -71,12 +71,12 @@
         &::placeholder {
           color: $df-placeholder-color;
         }
-        
+
         &:disabled {
           opacity: 0.6;
           cursor: not-allowed;
           background-color: color.scale($df-field-bg, $lightness: -5%);
-          
+
           &:hover,
           &:focus {
             border-color: $df-border-color;
@@ -97,53 +97,53 @@
     border: 1px solid $df-border-color !important;
     font-family: $df-font-family !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    
+
     &__header {
       background-color: $df-primary-color !important;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
       color: white !important;
       padding: 10px !important;
-      
+
       &--custom {
         background-color: $df-primary-color !important;
       }
     }
-    
+
     &__current-month {
       color: white !important;
       font-weight: $df-font-weight-semibold;
     }
-    
+
     &__day-name {
       color: rgba(255, 255, 255, 0.8) !important;
       font-weight: $df-font-weight-semibold;
     }
-    
+
     &__day {
       color: $df-text-color !important;
       border-radius: $df-border-radius-sm;
-      
+
       &:hover {
         background-color: rgba($df-primary-color, 0.1) !important;
       }
-      
+
       &--selected {
         background-color: $df-primary-color !important;
         color: white !important;
         font-weight: bold;
       }
-      
+
       &--keyboard-selected {
         background-color: rgba($df-primary-color, 0.2) !important;
         color: $df-text-color !important;
       }
-      
+
       &--today {
         font-weight: bold;
         position: relative;
-        
+
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: 2px;
           left: 50%;
@@ -154,33 +154,33 @@
           background-color: $df-primary-color;
         }
       }
-      
+
       &--outside-month {
         color: rgba($df-text-color, 0.4) !important;
       }
     }
-    
+
     &__navigation {
       top: 12px;
-      
+
       &-icon::before {
         border-color: white !important;
       }
-      
+
       &--previous {
         left: 10px;
       }
-      
+
       &--next {
         right: 10px;
       }
-      
+
       &:hover {
         background-color: rgba(255, 255, 255, 0.1) !important;
         border-radius: $df-border-radius-sm;
       }
     }
-    
+
     &__triangle {
       display: none;
     }
@@ -195,19 +195,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
     .react-datepicker__current-month {
       margin-bottom: 8px;
     }
-    
+
     .react-datepicker__header__dropdown {
       display: flex;
       justify-content: center;
       gap: 12px !important;
       margin: 4px 0 8px 0 !important;
-      
     }
-    
+
     .react-datepicker__year-read-view,
     .react-datepicker__month-read-view {
       color: white !important;
@@ -219,17 +218,17 @@
       transition: all $df-transition-speed $df-transition-timing;
       font-weight: $df-font-weight-semibold;
       position: relative;
-      
+
       &:hover {
         background-color: rgba(255, 255, 255, 0.3) !important;
       }
-      
+
       &--down-arrow {
         border-color: white !important;
         margin-left: 6px;
       }
     }
-    
+
     .react-datepicker__year-dropdown-container,
     .react-datepicker__month-dropdown-container {
       display: flex;
@@ -238,30 +237,29 @@
       }
     }
 
-    .react-datepicker__year-dropdown{
+    .react-datepicker__year-dropdown {
       position: absolute;
       top: 40px;
       left: 53%;
       width: 40%;
-     
     }
-    .react-datepicker__month-dropdown{
+    .react-datepicker__month-dropdown {
       position: absolute;
       top: 40px;
       left: 8%;
       width: 40%;
     }
   }
-  
+
   .react-datepicker__year,
   .react-datepicker__month {
-    background-color: white !important; 
+    background-color: white !important;
     border: 1px solid $df-border-color !important;
     border-radius: $df-border-radius-sm !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
     padding: 8px 0 !important;
     top: 110% !important;
-    
+
     &-option {
       appearance: none;
       color: $df-text-color !important;
@@ -271,43 +269,45 @@
       white-space: nowrap;
       text-align: left;
       box-sizing: border-box;
-      
+
       &:hover,
       &:focus,
       &:active {
         background-color: $df-primary-color !important;
         color: white !important;
       }
-      
+
       &--selected {
         background-color: rgba($df-primary-color, 0.15) !important;
         color: $df-primary-color !important;
         font-weight: $df-font-weight-semibold;
         display: none;
-        
+
         &:hover {
           background-color: $df-primary-color !important;
           color: white !important;
         }
       }
     }
-    
+
     .react-datepicker__navigation--years {
       &-previous,
       &-next {
         border-color: $df-primary-color !important;
         margin: 4px auto;
-        
+
         &:hover {
-          border-color: color.adjust($df-primary-color, $lightness: -10%) !important;
-          
+          border-color: color.adjust(
+            $df-primary-color,
+            $lightness: -10%
+          ) !important;
         }
       }
-      
+
       &-previous {
         border-top-color: transparent !important;
       }
-      
+
       &-next {
         border-bottom-color: transparent !important;
       }
@@ -331,7 +331,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  background-color:  $df-primary-color, ; 
+  background-color: $df-primary-color;
   color: white;
   border: none;
   border-radius: $df-border-radius-sm;
@@ -339,11 +339,11 @@
   font-weight: $df-font-weight-semibold;
   cursor: pointer;
   transition: all $df-transition-speed $df-transition-timing;
-  
+
   &:hover {
-    background-color: $df-primary-color-dark; 
+    background-color: $df-primary-color-dark;
   }
-  
+
   &:active {
     transform: translateY(0);
   }
@@ -359,18 +359,18 @@
 // ============================================================================
 .df-input-error {
   border: 1px solid $df-error-color !important;
-  
+
   &:hover:not(:focus) {
     border: 2px solid $df-error-color !important;
     background: rgba($df-error-color, 0.12) !important;
   }
-  
+
   &:focus {
     border: 2px solid $df-error-color !important;
     background: rgba($df-error-color, 0.12) !important;
     outline: none !important;
   }
-  
+
   &:hover:focus {
     border: 2px solid $df-error-color !important;
     background: rgba($df-error-color, 0.16) !important;

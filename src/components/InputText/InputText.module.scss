@@ -19,15 +19,15 @@
   color: $df-text-color;
   font-size: 0.95em;
   text-align: start;
-  
+
   &.required::after {
-    content: ' *';
+    content: " *";
     color: $df-error-color;
   }
-  
+
   .df-dark-theme & {
     color: $df-dark-text;
-    
+
     &.required::after {
       color: $df-dark-error;
     }
@@ -48,13 +48,13 @@
   color: $df-text-color;
   transition: all $df-transition-speed $df-transition-timing;
   box-sizing: border-box;
-  
+
   &:not(:disabled):not(.error):hover {
     border: 2px solid $df-primary-color;
     background: rgba($df-primary-color, 0.08);
     padding: 9px 11px;
   }
-  
+
   &:not(.error):focus,
   &:not(.error):focus-visible {
     outline: none;
@@ -62,29 +62,29 @@
     background: rgba($df-primary-color, 0.08);
     padding: 9px 11px;
   }
-  
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     background-color: color.scale($df-field-bg, $lightness: -5%);
-    
+
     &:hover {
       border: 1px solid $df-border-color;
       background-color: color.scale($df-field-bg, $lightness: -5%);
       padding: 10px 12px;
     }
   }
-  
+
   &.error {
     border: 1px solid $df-error-color;
     color: $df-error-color;
-    
+
     &:not(:disabled):hover {
       border: 2px solid $df-error-color;
       background: rgba($df-error-color, 0.08);
       padding: 9px 11px;
     }
-    
+
     &:focus,
     &:focus-visible {
       outline: none;
@@ -93,12 +93,12 @@
       padding: 9px 11px;
     }
   }
-  
+
   &::placeholder {
     color: $df-placeholder-color;
     font-weight: normal;
   }
-  
+
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px $df-field-bg inset;
     -webkit-text-fill-color: $df-text-color;
@@ -113,40 +113,40 @@
     background: $df-dark-cell-bg;
     color: $df-dark-text;
     border-color: $df-dark-border;
-    
+
     &:not(:disabled):not(.error):hover {
       border: 2px solid $df-primary-color-light;
       background: rgba($df-primary-color-light, 0.12);
       padding: 9px 11px;
     }
-    
+
     &:not(.error):focus,
     &:not(.error):focus-visible {
       border: 2px solid $df-primary-color-light;
       background: rgba($df-primary-color-light, 0.12);
       padding: 9px 11px;
     }
-    
+
     &:disabled {
       background-color: color.scale($df-dark-cell-bg, $lightness: 2%);
-      
+
       &:hover {
         border: 1px solid $df-dark-border;
         background-color: color.scale($df-dark-cell-bg, $lightness: 2%);
         padding: 10px 12px;
       }
     }
-    
+
     &.error {
       border: 1px solid $df-dark-error;
       color: $df-dark-error;
-      
+
       &:not(:disabled):hover {
         border: 2px solid $df-dark-error;
         background: rgba($df-dark-error, 0.12);
         padding: 9px 11px;
       }
-      
+
       &:focus,
       &:focus-visible {
         border: 2px solid $df-dark-error;
@@ -154,11 +154,11 @@
         padding: 9px 11px;
       }
     }
-    
+
     &::placeholder {
       color: $df-dark-placeholder;
     }
-    
+
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0px 1000px $df-dark-cell-bg inset;
       -webkit-text-fill-color: $df-dark-text;
@@ -173,7 +173,7 @@
   color: $df-error-color;
   font-size: 0.85em;
   margin: 0;
-  
+
   .df-dark-theme & {
     color: $df-dark-error;
   }
@@ -196,7 +196,7 @@
     border: 1px solid #ccc;
     background: white;
     color: black;
-    
+
     &.error {
       border-color: #990000;
       color: #990000;

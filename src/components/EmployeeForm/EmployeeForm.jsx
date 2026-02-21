@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   addEmployeeStart,
@@ -13,9 +13,15 @@ import Modal from "../Modal/Modal";
 import { departments, states } from "../../constants";
 import styles from "./EmployeeForm.module.scss";
 
+/**
+ * EmployeeForm component - Main form for creating new employees.
+ * Handles form state, validation, submission, and success modal.
+ */
 const EmployeeForm = () => {
+  // ===== REDUX =====
   const dispatch = useDispatch();
 
+  // ===== STATE =====
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -33,43 +39,44 @@ const EmployeeForm = () => {
   const [fieldErrors, setFieldErrors] = useState({
     firstName: "",
     lastName: "",
-    street: "",  
+    street: "",
     city: "",
     zipCode: "",
   });
 
-  // Validation functions
+  // ===== VALIDATION FUNCTIONS =====
   const validateName = (name) => {
     if (!name.trim()) return "Please fill in this field";
     const nameRegex = /^[\p{Letter}\s\-.']+$/u;
-    if (!nameRegex.test(name)) return "Only letters, hyphens, apostrophes, and spaces are allowed";
+    if (!nameRegex.test(name))
+      return "Only letters, hyphens, apostrophes, and spaces are allowed";
     return "";
   };
 
   const validateStreet = (street) => {
     if (!street.trim()) return "Please fill in this field";
     const streetRegex = /^[^\p{C}]+$/u;
-    if (!streetRegex.test(street))
-      return "Please enter a valid street address";
+    if (!streetRegex.test(street)) return "Please enter a valid street address";
     return "";
   };
 
-const validateCity = (city) => {
-  if (!city.trim()) return "Please fill in this field";
-  const cityRegex = /^[\p{Letter}\s\-.'()]+$/u;
-  if (!cityRegex.test(city))
-    return "Please enter a valid city name. Only letters, spaces, hyphens, apostrophes, and periods are allowed.";
-  return "";
-};
+  const validateCity = (city) => {
+    if (!city.trim()) return "Please fill in this field";
+    const cityRegex = /^[\p{Letter}\s\-.'()]+$/u;
+    if (!cityRegex.test(city))
+      return "Please enter a valid city name. Only letters, spaces, hyphens, apostrophes, and periods are allowed.";
+    return "";
+  };
 
   const validateZipCode = (zipCode) => {
     if (!zipCode.trim()) return "Zip code is required";
     const zipRegex = /^(?:\d{5}|\d{5}-\d{4})$/;
-    if (!zipRegex.test(zipCode)) return "Please enter a valid zip code (5 digits or 5+4 format)";
+    if (!zipRegex.test(zipCode))
+      return "Please enter a valid zip code (5 digits or 5+4 format)";
     return "";
   };
 
-  // Event handlers
+  // ===== EVENT HANDLERS =====
   const handleChangeInputText = (e) => {
     const { name, value } = e.target;
 
@@ -101,19 +108,19 @@ const validateCity = (city) => {
     }));
   };
 
-  // Form submission handler
+  // ===== FORM SUBMISSION =====
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
 
     const firstNameError = validateName(formData.firstName);
     const lastNameError = validateName(formData.lastName);
-    const streetError = validateStreet(formData.street); 
+    const streetError = validateStreet(formData.street);
     const cityError = validateCity(formData.city);
     const zipCodeError = validateZipCode(formData.zipCode);
 
     // Check other required fields
-    const requiredFields = ["state", "department"]; 
+    const requiredFields = ["state", "department"];
     let hasRequiredFieldError = false;
 
     for (let field of requiredFields) {
@@ -129,11 +136,18 @@ const validateCity = (city) => {
     }
 
     // Set errors if any
-    if (firstNameError || lastNameError || streetError || zipCodeError || hasRequiredFieldError) {
+    if (
+      firstNameError ||
+      lastNameError ||
+      streetError ||
+      cityError ||
+      zipCodeError ||
+      hasRequiredFieldError
+    ) {
       setFieldErrors({
         firstName: firstNameError,
         lastName: lastNameError,
-        street: streetError,  
+        street: streetError,
         city: cityError,
         zipCode: zipCodeError,
       });
@@ -165,7 +179,8 @@ const validateCity = (city) => {
       setFieldErrors({
         firstName: "",
         lastName: "",
-        street: "",  // ADDED THIS
+        street: "",
+        city: "",
         zipCode: "",
       });
       setShowModal(true);
@@ -174,9 +189,11 @@ const validateCity = (city) => {
     }
   };
 
+  // ===== RENDER =====
   return (
     <>
       <form className={styles.formContainer} onSubmit={handleSubmit}>
+        {/* Personal Information */}
         <InputText
           label="First Name"
           name="firstName"
@@ -209,6 +226,8 @@ const validateCity = (city) => {
           submitted={submitted}
           required={true}
         />
+
+        {/* Address Information */}
         <fieldset className="address">
           <legend>Address</legend>
           <InputText
@@ -217,7 +236,7 @@ const validateCity = (city) => {
             value={formData.street}
             onChange={handleChangeInputText}
             submitted={submitted}
-            error={fieldErrors.street}  // ADDED THIS
+            error={fieldErrors.street}
             required={true}
           />
           <InputText
@@ -232,7 +251,9 @@ const validateCity = (city) => {
             label="State"
             data={states}
             selectedValue={formData.state}
-            handleChange={(selected) => handleChangeInputSelect("state", selected)}
+            handleChange={(selected) =>
+              handleChangeInputSelect("state", selected)
+            }
             submitted={submitted}
             required={true}
           />
@@ -248,17 +269,29 @@ const validateCity = (city) => {
             required={true}
           />
         </fieldset>
+
+        {/* Employment Information */}
         <InputSelect
           label="Department"
           data={departments}
           selectedValue={formData.department}
-          handleChange={(selected) => handleChangeInputSelect("department", selected)}
+          handleChange={(selected) =>
+            handleChangeInputSelect("department", selected)
+          }
           submitted={submitted}
           required={true}
         />
+
+        {/* Submit Button */}
         <Button type="submit">Save</Button>
       </form>
-      <Modal show={showModal} onClose={() => setShowModal(false)} />
+
+      {/* Success Modal */}
+      <Modal
+        show={showModal}
+        message="Employee created!"
+        onClose={() => setShowModal(false)}
+      />
     </>
   );
 };

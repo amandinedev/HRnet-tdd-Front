@@ -1,7 +1,10 @@
-@use '../../sass/abstracts' as *;
+@use "../../sass/abstracts" as *;
 @use "sass:color";
 @use "sass:meta";
 
+// ============================================================================
+// CONTAINER
+// ============================================================================
 .df-input-select-container {
   display: flex;
   flex-direction: column;
@@ -12,31 +15,21 @@
 // ============================================================================
 // LABEL STYLING
 // ============================================================================
-
 .df-input-select-label {
   font-weight: $df-font-weight-semibold;
   color: $df-text-color;
   font-size: 0.95em;
   text-align: start;
-  
+
   &.required::after {
-    content: ' *';
+    content: " *";
     color: $df-error-color;
-  }
-  
-  .df-dark-theme & {
-    color: $df-dark-text;
-    
-    &.required::after {
-      color: $df-dark-error;
-    }
   }
 }
 
 // ============================================================================
 // CUSTOM DROPDOWN WRAPPER
 // ============================================================================
-
 .df-input-select-wrapper {
   position: relative;
   display: block;
@@ -44,9 +37,8 @@
 }
 
 // ============================================================================
-// DROPDOWN TRIGGER 
+// DROPDOWN TRIGGER
 // ============================================================================
-
 .df-input-select-trigger {
   width: 100%;
   padding: 10px 36px 10px 12px;
@@ -72,9 +64,8 @@
 
   &:focus {
     outline: none;
-    border: 2px solid $df-primary-color; 
+    border: 2px solid $df-primary-color;
     background: rgba($df-primary-color, 0.08);
- 
   }
 
   &:active:not(.df-input-select-trigger--disabled) {
@@ -85,7 +76,7 @@
     opacity: 0.6;
     cursor: not-allowed;
     background-color: color.scale($df-field-bg, $lightness: -5%);
-    
+
     &:focus {
       border-color: $df-border-color !important;
       box-shadow: none;
@@ -94,93 +85,36 @@
 
   // Open state - also green border when open
   &--open {
-     border: 2px solid $df-primary-color;
-    
+    border: 2px solid $df-primary-color;
+
     &:focus {
-       border: 2px solid $df-primary-color; 
+      border: 2px solid $df-primary-color;
     }
   }
 
   // Error state
   &.error {
     border-color: $df-error-color;
-    
+
     &:hover:not(.df-input-select-trigger--disabled) {
-      border:2px solid $df-error-color;
+      border: 2px solid $df-error-color;
       background: rgba($df-error-color, 0.08);
     }
-    
+
     &:focus {
       border: 2px solid $df-error-color !important;
-        background: rgba($df-error-color, 0.08);
+      background: rgba($df-error-color, 0.08);
     }
-    
+
     &.df-input-select-trigger--open {
       border: 2px solid $df-error-color !important;
       background: rgba($df-error-color, 0.08);
     }
-  }
 
-  // Dark theme
-  .df-dark-theme & {
-    background: $df-dark-cell-bg;
-    color: $df-dark-text;
-    border-color: $df-dark-border;
-
-    &:hover:not(.df-input-select-trigger--disabled) {
-      border-color: $df-primary-color-light;
-      background: rgba($df-primary-color-light, 0.12);
-    }
-
-    // FOCUS STATE IN DARK THEME - Green border
-    &:focus {
-      border-color: $df-primary-color-light !important;
-    }
-
-    &:active:not(.df-input-select-trigger--disabled) {
-      transform: translateY(1px);
-    }
-
-    &--open {
-      border-color: $df-primary-color-light !important;
-      
-      &:focus {
-        border-color: $df-primary-color-light !important;
-      }
-    }
-
-    &--disabled {
-      background-color: color.scale($df-dark-cell-bg, $lightness: 2%);
-      
-      &:focus {
-        border-color: $df-dark-border !important;
-        box-shadow: none;
-      }
-    }
-
-    &.error {
-      border-color: $df-dark-error;
-      
-      &:hover:not(.df-input-select-trigger--disabled) {
-        border-color: $df-dark-error;
-        background: rgba($df-dark-error, 0.12);
-      }
-      
-      &:focus {
-        border-color: $df-dark-error !important;
-      }
-      
-       // Open state in error - RED
-    &.df-input-select-trigger--open {
-      border: 2px solid $df-error-color !important;
-      background: rgba($df-error-color, 0.08);
-    }
-    
     // Active state in error - RED
     &:active:not(.df-input-select-trigger--disabled) {
       background: rgba($df-error-color, 0.15);
       border: 2px solid $df-error-color;
-    }
     }
   }
 }
@@ -188,7 +122,6 @@
 // ============================================================================
 // SELECTED VALUE & PLACEHOLDER
 // ============================================================================
-
 .df-input-select-value {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -201,16 +134,11 @@
 .df-input-select-placeholder {
   color: $df-placeholder-color !important;
   font-weight: normal;
-  
-  .df-dark-theme & {
-    color: $df-dark-placeholder !important;
-  }
 }
 
 // ============================================================================
 // DROPDOWN ARROW
 // ============================================================================
-
 .df-input-select-arrow {
   position: absolute;
   right: 12px;
@@ -238,25 +166,11 @@
     color: $df-error-color !important;
     opacity: 1;
   }
-
-  .df-dark-theme & {
-    color: $df-dark-text;
-
-    .df-input-select-trigger:hover &,
-    .df-input-select-trigger:focus & {
-      color: $df-primary-color-light;
-    }
-
-    .df-input-select-trigger--open & {
-      color: $df-primary-color-light;
-    }
-  }
 }
 
 // ============================================================================
 // DROPDOWN OPTIONS MENU
 // ============================================================================
-
 .df-input-select-options {
   position: absolute;
   top: calc(100% + 4px);
@@ -272,23 +186,13 @@
   animation: dropdownFadeIn $df-transition-speed $df-transition-timing;
 
   @if meta.mixin-exists(df-scrollbar) {
-  @include df-scrollbar(6px);
-}
+    @include df-scrollbar(6px);
+  }
 
   &--above {
     top: auto;
     bottom: calc(100% + 4px);
     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .df-dark-theme & {
-    background: color.scale($df-dark-cell-bg, $lightness: 5%);
-    border-color: $df-dark-border;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
-    &--above {
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
-    }
   }
 }
 
@@ -306,7 +210,6 @@
 // ============================================================================
 // INDIVIDUAL OPTION ITEMS
 // ============================================================================
-
 .df-input-select-option {
   padding: 10px 12px;
   background: $df-field-bg;
@@ -344,7 +247,7 @@
       background: color.scale($df-primary-color, $lightness: 5%);
       color: white;
     }
-    
+
     &:focus {
       background: $df-primary-color;
       color: white;
@@ -360,60 +263,20 @@
     border-bottom-left-radius: $df-border-radius-sm;
     border-bottom-right-radius: $df-border-radius-sm;
   }
-
-  .df-dark-theme & {
-    background: color.scale($df-dark-cell-bg, $lightness: 5%);
-    color: $df-dark-text;
-
-    &:hover:not(.df-input-select-option--disabled) {
-      background: rgba($df-primary-color-light, 0.12);
-      color: $df-primary-color-light;
-    }
-
-    &:focus {
-      background: rgba($df-primary-color-light, 0.12);
-      color: $df-primary-color-light;
-    }
-
-    &:active:not(.df-input-select-option--disabled) {
-      background: rgba($df-primary-color-light, 0.2);
-    }
-
-    &--selected {
-      background: $df-primary-color-light;
-      color: $df-dark-text;
-
-      &:hover {
-        background: color.scale($df-primary-color-light, $lightness: -5%);
-        color: $df-dark-text;
-      }
-      
-      &:focus {
-        background: $df-primary-color-light;
-        color: $df-dark-text;
-      }
-    }
-  }
 }
 
 // ============================================================================
 // ERROR MESSAGE
 // ============================================================================
-
 .df-input-select-error {
   color: $df-error-color;
   font-size: 0.85em;
   margin: 0;
-  
-  .df-dark-theme & {
-    color: $df-dark-error;
-  }
 }
 
 // ============================================================================
 // ACCESSIBILITY & REDUCED MOTION
 // ============================================================================
-
 @media (prefers-reduced-motion: reduce) {
   .df-input-select-trigger,
   .df-input-select-arrow,
@@ -421,9 +284,7 @@
     transition: none;
   }
 
-  .df-input-select-trigger:active:not(
-      .df-input-select-trigger--disabled
-    ) {
+  .df-input-select-trigger:active:not(.df-input-select-trigger--disabled) {
     transform: none;
   }
 
@@ -441,14 +302,13 @@
 // ============================================================================
 // PRINT STYLES
 // ============================================================================
-
 @media print {
   .df-input-select-trigger {
     border: 1px solid #ccc;
     background: white;
     color: black;
   }
-  
+
   .df-input-select-options {
     display: none;
   }

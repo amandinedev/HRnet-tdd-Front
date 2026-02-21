@@ -1,32 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
 import styles from "./Button.module.scss";
 
-const Button = ({ 
-  type, 
-  to, 
-  children, 
-  onClick, 
-  disabled, 
+/**
+ * Button component - A reusable button with support for different types,
+ * navigation, custom styling, and test IDs.
+ */
+const Button = ({
+  type,
+  to,
+  children,
+  onClick,
+  disabled,
   className = styles.greenButton,
-  'data-testid': testId, 
-  ...props 
+  "data-testid": testId,
+  ...props
 }) => {
-  // Generate test ID from button text if not provided
-  const generatedTestId = testId || `button-${String(children).toLowerCase().replace(/\s+/g, '-')}`;
+  // ===== DERIVED VALUES =====
+  const generatedTestId =
+    testId || `button-${String(children).toLowerCase().replace(/\s+/g, "-")}`;
 
+  // ===== RENDER =====
   return (
-    <button 
-      type={type || 'button'} 
+    <button
+      type={type || "button"}
       onClick={onClick}
       disabled={disabled}
       className={className}
-      data-testid={generatedTestId} 
-      {...props} 
+      data-testid={generatedTestId}
+      {...props}
     >
       {children}
     </button>
   );
+};
+
+Button.propTypes = {
+  type: PropTypes.oneOf(["button", "submit", "reset"]),
+  to: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
+  "data-testid": PropTypes.string,
 };
 
 export default Button;

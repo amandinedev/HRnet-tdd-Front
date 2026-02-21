@@ -1,15 +1,25 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DataTable from "react-paginated-datatable";
 import "./EmployeeListPage.scss";
 
+/**
+ * EmployeeListPage component - Displays a paginated, searchable table of all employees.
+ * Includes loading state, row selection, and navigation back to home.
+ */
 const EmployeeListPage = () => {
+  // ===== REDUX STATE =====
   const employeesSlice = useSelector((state) => state.employees);
 
+  // ===== COMPONENT STATE =====
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  // ===== DERIVED VALUES =====
   const employees = employeesSlice?.list || [];
 
-  // Define columns for the table
+  // ===== TABLE CONFIGURATION =====
   const employeeColumns = [
     {
       dataKey: "firstName",
@@ -56,8 +66,29 @@ const EmployeeListPage = () => {
     { dataKey: "zipCode", title: "Zip Code", sortable: true, width: "100px" },
   ];
 
+  // ===== EFFECTS =====
+  useEffect(() => {
+    // Simulate data loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // ===== EVENT HANDLERS =====
+  const handleRowClick = (row) => {
+    setSelectedRows((prevSelected) =>
+      prevSelected.includes(row.id)
+        ? prevSelected.filter((id) => id !== row.id)
+        : [...prevSelected, row.id],
+    );
+  };
+
+  // ===== RENDER =====
   return (
     <main className="employee-list-container">
+      {/* Header Section */}
       <header className="page-header">
         <h1>Current Employees</h1>
         <p className="page-subtitle">
@@ -65,12 +96,16 @@ const EmployeeListPage = () => {
         </p>
       </header>
 
+      {/* Data Table Section */}
       <div className="table-container">
         <DataTable
           data={employees}
           columns={employeeColumns}
+          selectedRows={selectedRows}
+          onRowClick={handleRowClick}
           itemsPerPage={10}
           searchable={true}
+          searchMode="and"
           sortable={true}
           pagination={true}
           striped={true}
@@ -82,8 +117,11 @@ const EmployeeListPage = () => {
               ? "No employees added yet"
               : "No matching employees found"
           }
+          loading={isLoading}
         />
       </div>
+
+      {/* Navigation Link */}
       <Link to="/" className="linkButton" tabIndex={0}>
         Home
       </Link>

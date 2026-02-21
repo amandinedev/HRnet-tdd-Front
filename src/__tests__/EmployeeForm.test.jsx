@@ -220,7 +220,7 @@ describe('EmployeeForm', () => {
       
       // Wait for modal - check for modal by text (since Modal might not have test ID)
       await waitFor(() => {
-        expect(screen.getByText(/Employee has been successfully added/i)).toBeInTheDocument();
+        expect(screen.getByText(/Employee created/i)).toBeInTheDocument();
       }, { timeout: 3000 });
     });
 

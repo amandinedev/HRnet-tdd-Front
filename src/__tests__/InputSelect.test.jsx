@@ -1,17 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import InputSelect from "../components/InputSelect/InputSelect";
-
-// Helper to match component's toCamelCase function
-const toCamelCase = (str) => {
-  return str
-    .split(" ")
-    .map((word, index) =>
-      index === 0
-        ? word.toLowerCase()
-        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-    )
-    .join("");
-};
+import { toCamelCase } from "../utils/utils";
 
 describe("InputSelect Component", () => {
   const mockStates = [

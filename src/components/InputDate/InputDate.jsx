@@ -8,7 +8,8 @@ import styles from "./InputDate.module.scss";
 /**
  * Custom footer component for the date picker with a Today button.
  */
-const CustomFooter = ({ onChange, date, setCalendarDate }) => {
+
+const CustomFooter = ({ onChange, setCalendarDate }) => {
   // ===== EVENT HANDLERS =====
   const handleTodayClick = () => {
     const today = new Date();
@@ -34,7 +35,6 @@ const CustomFooter = ({ onChange, date, setCalendarDate }) => {
 
 CustomFooter.propTypes = {
   onChange: PropTypes.func.isRequired,
-  date: PropTypes.instanceOf(Date),
   setCalendarDate: PropTypes.func,
 };
 
@@ -42,6 +42,7 @@ CustomFooter.propTypes = {
  * InputDate component - A wrapper around react-datepicker with label,
  * error handling, and custom footer.
  */
+
 const InputDate = ({
   label,
   dateValue,
@@ -63,7 +64,7 @@ const InputDate = ({
   const testId = `input-${formattedId}`;
 
   // ===== HELPER FUNCTIONS =====
-  const setCalendarDate = (date) => {
+  const setCalendarDate = () => {
     if (datePickerRef.current) {
       // Force calendar to update its internal date
       datePickerRef.current.setOpen(true);
@@ -111,7 +112,6 @@ const InputDate = ({
         >
           <CustomFooter
             onChange={handleChange}
-            date={dateValue}
             setCalendarDate={setCalendarDate}
           />
         </DatePicker>

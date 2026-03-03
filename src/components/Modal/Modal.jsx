@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import styles from "./Modal.module.scss";
 
 /**
- * Modal component - A reusable modal dialog with overlay, close button,
+ * Modal component - A reusable modal dialog with overlay, custom message close button,
  * and Escape key support.
  */
 const Modal = ({ show, message, onClose }) => {

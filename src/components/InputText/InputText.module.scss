@@ -24,14 +24,6 @@
     content: " *";
     color: $df-error-color;
   }
-
-  .df-dark-theme & {
-    color: $df-dark-text;
-
-    &.required::after {
-      color: $df-dark-error;
-    }
-  }
 }
 
 // ============================================================================
@@ -106,77 +98,12 @@
 }
 
 // ============================================================================
-// DARK THEME STYLING
-// ============================================================================
-.df-dark-theme {
-  .df-input-text-field {
-    background: $df-dark-cell-bg;
-    color: $df-dark-text;
-    border-color: $df-dark-border;
-
-    &:not(:disabled):not(.error):hover {
-      border: 2px solid $df-primary-color-light;
-      background: rgba($df-primary-color-light, 0.12);
-      padding: 9px 11px;
-    }
-
-    &:not(.error):focus,
-    &:not(.error):focus-visible {
-      border: 2px solid $df-primary-color-light;
-      background: rgba($df-primary-color-light, 0.12);
-      padding: 9px 11px;
-    }
-
-    &:disabled {
-      background-color: color.scale($df-dark-cell-bg, $lightness: 2%);
-
-      &:hover {
-        border: 1px solid $df-dark-border;
-        background-color: color.scale($df-dark-cell-bg, $lightness: 2%);
-        padding: 10px 12px;
-      }
-    }
-
-    &.error {
-      border: 1px solid $df-dark-error;
-      color: $df-dark-error;
-
-      &:not(:disabled):hover {
-        border: 2px solid $df-dark-error;
-        background: rgba($df-dark-error, 0.12);
-        padding: 9px 11px;
-      }
-
-      &:focus,
-      &:focus-visible {
-        border: 2px solid $df-dark-error;
-        background: rgba($df-dark-error, 0.12);
-        padding: 9px 11px;
-      }
-    }
-
-    &::placeholder {
-      color: $df-dark-placeholder;
-    }
-
-    &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0px 1000px $df-dark-cell-bg inset;
-      -webkit-text-fill-color: $df-dark-text;
-    }
-  }
-}
-
-// ============================================================================
 // ERROR MESSAGE STYLING
 // ============================================================================
 .df-input-text-error {
   color: $df-error-color;
   font-size: 0.85em;
   margin: 0;
-
-  .df-dark-theme & {
-    color: $df-dark-error;
-  }
 }
 
 // ============================================================================

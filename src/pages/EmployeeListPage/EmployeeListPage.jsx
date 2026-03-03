@@ -8,6 +8,7 @@ import "./EmployeeListPage.scss";
  * EmployeeListPage component - Displays a paginated, searchable table of all employees.
  * Includes loading state, row selection, and navigation back to home.
  */
+
 const EmployeeListPage = () => {
   // ===== REDUX STATE =====
   const employeesSlice = useSelector((state) => state.employees);

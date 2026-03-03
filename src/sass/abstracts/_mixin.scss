@@ -117,12 +117,6 @@
   $border: $df-border-color;
   $bg: $df-fieldset-bg;
   $text: $df-text-color;
-
-  @if $theme == dark {
-    $border: $df-dark-border;
-    $bg: $df-dark-fieldset-bg;
-    $text: $df-dark-text;
-  }
   
   border: 2px solid $border;
   border-radius: $df-border-radius;
@@ -167,40 +161,5 @@
     width: 50%;
   }
   
-  // Dark theme support
-  &.dark-theme {
-    background: $df-dark-container-bg;
-    color: $df-dark-text;
-  }
 }
 
-// ============================================================================
-// DARK THEME MIXINS
-// ============================================================================
-
-@mixin df-dark-theme {
-  &.dark-theme {
-    @content;
-  }
-}
-
-@mixin df-dark-form-card {
-  @include df-dark-theme {
-    background: $df-dark-card-bg;
-    color: $df-dark-text;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
-  }
-}
-
-@mixin df-dark-form-field {
-  @include df-dark-theme {
-    background: $df-dark-cell-bg;
-    border-color: $df-dark-border;
-    color: $df-dark-text;
-    
-    &:focus {
-      border-color: $df-dark-field-border-focus;
-      box-shadow: 0 0 0 4px rgba($df-primary-color-light, 0.25);
-    }
-  }
-}
